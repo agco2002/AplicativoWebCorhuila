@@ -4,7 +4,7 @@ $idEvento = $_GET['id_evento'];
 $idParticipante = $_GET['id_participante'];
 
 // Conectarse a la base de datos
-$db = new mysqli('localhost', 'root', '', 'desarrollo_eventos');
+$db = new mysqli('localhost', 'root', '', 'corhuila');
 
 // Recuperar datos del participante actual
 $consultaParticipante = "SELECT nombre, identificación, correo FROM participantes WHERE id_participante = ? AND id_evento = ?";

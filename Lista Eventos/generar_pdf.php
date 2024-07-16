@@ -7,7 +7,7 @@ header('Content-Type: text/html; charset=utf-8');
 $idEvento = $_GET['id_evento'];
 
 // Conectarse a la base de datos
-$db = new mysqli('localhost', 'root', '', 'desarrollo_eventos');
+$db = new mysqli('localhost', 'root', '', 'corhuila');
 $db->set_charset("utf8mb4");
 
 // Función para convertir UTF-8 a ISO-8859-1

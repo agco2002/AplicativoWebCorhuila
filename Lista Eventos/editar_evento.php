@@ -3,7 +3,7 @@
 $idEvento = $_GET['id_evento'];
 
 // Conectarse a la base de datos
-$db = new mysqli('localhost', 'root', '', 'desarrollo_eventos');
+$db = new mysqli('localhost', 'root', '', 'corhuila');
 
 // Recuperar datos del evento
 $consulta = "SELECT titulo, iniciador, cargo, descripcion, fecha, hora, ubicacion FROM eventos WHERE id_evento = ?";

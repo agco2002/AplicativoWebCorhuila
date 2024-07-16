@@ -8,7 +8,7 @@ if (isset($_POST['id_evento']) && isset($_POST['nombre']) && isset($_POST['ident
   $correo = $_POST['correo'];
 
   // Conectarse a la base de datos
-  $db = new mysqli('localhost', 'root', '', 'desarrollo_eventos');
+  $db = new mysqli('localhost', 'root', '', 'corhuila');
 
   // Guardar participante en la base de datos
   $consulta = "INSERT INTO participantes (id_evento, nombre, identificación, correo) VALUES (?, ?, ?, ?)";

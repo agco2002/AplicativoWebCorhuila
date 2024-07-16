@@ -1,6 +1,6 @@
 <?php
 // Conectarse a la base de datos
-$db = new mysqli('localhost', 'root', '', 'desarrollo_eventos');
+$db = new mysqli('localhost', 'root', '', 'corhuila');
 
 // Recuperar la lista de eventos
 $consultaEventos = "SELECT id_evento, titulo, iniciador, cargo, fecha, hora, ubicacion FROM eventos ORDER BY fecha, hora";

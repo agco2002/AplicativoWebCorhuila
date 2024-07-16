@@ -1,6 +1,6 @@
 <?php
 // Conectarse a la base de datos
-$db = new mysqli('localhost', 'root', '', 'desarrollo_eventos');
+$db = new mysqli('localhost', 'root', '', 'corhuila');
 
 // Validar datos del formulario
 if (isset($_POST['titulo']) && isset($_POST['iniciador']) && 

@@ -13,7 +13,7 @@ $ubicacion = $_POST['ubicacion'];
 $hora_24 = date("H:i", strtotime($hora_ampm));
 
 // Conectarse a la base de datos
-$db = new mysqli('localhost', 'root', '', 'desarrollo_eventos');
+$db = new mysqli('localhost', 'root', '', 'corhuila');
 
 // Actualizar evento en la base de datos
 $consulta = "UPDATE eventos SET titulo = ?, iniciador = ?, cargo = ?, descripcion = ?, fecha = ?, hora = ?, ubicacion = ? 

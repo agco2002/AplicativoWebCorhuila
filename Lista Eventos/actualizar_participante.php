@@ -7,7 +7,7 @@ $identificación = $_POST['identificación'];
 $correo = $_POST['correo'];
 
 // Conectarse a la base de datos
-$db = new mysqli('localhost', 'root', '', 'desarrollo_eventos');
+$db = new mysqli('localhost', 'root', '', 'corhuila');
 
 // Actualizar participante en la base de datos
 $consultaActualizarParticipante = "UPDATE participantes SET nombre = ?, identificación = ?, correo = ? WHERE id_participante = ? AND id_evento = ?";
