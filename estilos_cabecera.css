@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'Geomanist';
+    src: url('path/to/geomanist-regular.woff2') format('woff2'),
+         url('path/to/geomanist-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Geomanist', sans-serif;
+}
+
+.navbar {
+    background: linear-gradient(45deg, #1a1a1a, #2c2c2c) !important;
+}
+
+.custom-container {
+    padding-left: 3cm !important;  /* Separa el logo del borde izquierdo */
+}
+
+.custom-logo {
+    margin-right: 5cm;  /* Añade espacio entre el logo y el navbar */
+    transition: filter 0.3s ease;  /* Añade una transición suave */
+}
+
+.custom-logo:hover {
+    filter: drop-shadow(0 0 4px #00ff00);  /* Añade una sombra verde al pasar el cursor */
+}
+
+.custom-navbar {
+    margin-left: 5cm;  /* Mueve el navbar 5cm a la derecha */
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #00ff00 !important;
+}
+
+.dropdown-toggle {
+    background-color: #00ff00 !important;
+    border: none;
+}
+
+.dropdown-toggle:hover {
+    background-color: #00cc00 !important;
+}
+
+.dropdown-menu {
+    background-color: #1a1a1a;
+}
+
+.dropdown-item {
+    color: #ffffff;
+}
+
+.dropdown-item:hover {
+    background-color: #00ff00;
+    color: #1a1a1a;
+}
+
+@media (max-width: 991px) {
+    .navbar-nav {
+        background-color: #1a1a1a;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .custom-container {
+        padding-left: 15px !important;  /* Ajusta el padding para pantallas pequeñas */
+    }
+    
+    .custom-logo {
+        margin-right: 0;  /* Elimina el margen extra en pantallas pequeñas */
+    }
+    
+    .custom-navbar {
+        margin-left: 0;  /* Elimina el margen extra en pantallas pequeñas */
+    }
+}
