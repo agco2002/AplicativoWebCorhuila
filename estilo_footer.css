@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap');
+
+body {
+    font-family: 'Geomanist', sans-serif;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+}
+
+.footer-logo {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+.footer h5 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+.footer ul {
+    padding-left: 0;
+}
+
+.footer ul li {
+    margin-bottom: 10px;
+}
+
+.social-icons {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.social-icon {
+    color: #fff;
+    font-size: 24px;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #4CAF50;
+}
+
+@media (max-width: 768px) {
+    .footer .col-md-3 {
+        margin-bottom: 30px;
+    }
+    
+    .social-icons {
+        position: static;
+        text-align: center;
+        margin-top: 20px;
+    }
+}
