@@ -1,3 +1,4 @@
+<!--Login.php-->
 <?php
 session_start();
 if (isset($_SESSION['usuario'])) {
@@ -18,7 +19,7 @@ if (isset($_SESSION['usuario'])) {
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h2 class="text-center mb-4">Login Administrativo</h2>
+                <h2 class="text-center mb-4">CORHUILA</h2>
                 <form id="loginForm">
                     <div class="mb-3">
                         <label for="loginCorreo" class="form-label">Correo</label>

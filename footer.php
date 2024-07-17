@@ -1,3 +1,4 @@
+<!--footer.php-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +14,7 @@
     <!-- Contenido principal de la página -->
     
     <footer class="footer">
-        <div class="container">
+        <div class="container-fliud custom-container">
             <h1 class="text-center">Corporación Universitaria del Huila</h1>
             <br>
             <div class="row">
@@ -58,11 +59,11 @@
             </div>
             <hr>
             <div class="row mt-3">
-                <div class="col-md-6 col-sm-12 mb-2">
-                    <p>&copy; 2024 Tu Empresa. Todos los derechos reservados.</p>
+                <div class="col-md-6 col-sm-12 mb-2 text-center">
+                    <p>&copy; 2024 CORHUILA. Todos los derechos reservados.</p>
                 </div>
                 <div class="col-md-6 col-sm-12 mb-2 text-md-end text-center">
-                    <p>Diseñado por <span>AGCO2002</span></p>
+                    <p class="text-center">Diseñado por <span>AGCO2002</span></p>
                 </div>
             </div>
             <div class="social-icons">
@@ -74,6 +75,6 @@
     </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script_cabecera.js"></script>
 </body>
 </html>

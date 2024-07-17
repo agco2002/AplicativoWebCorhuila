@@ -1,3 +1,4 @@
+<!--cabecera-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,13 +21,13 @@
             <div class="collapse navbar-collapse custom-navbar" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
+                        <a class="nav-link" href="index.php">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Crear Eventos</a>
+                        <a class="nav-link" href="Lista Eventos/crear_eventos.php">Crear Eventos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Eventos</a>
+                        <a class="nav-link" href="Lista Eventos/mostrar_eventos.php">Eventos</a>
                     </li>
                 </ul>
                 <div class="dropdown">
@@ -34,7 +35,7 @@
                         <i class="fas fa-cog"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#" id="logoutBtn">Cerrar sesión</a></li>
+                        <li><a class="dropdown-item" onclick="cerrarSesion()" >Cerrar sesión</a></li>
                     </ul>
                 </div>
             </div>
@@ -42,6 +43,6 @@
     </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

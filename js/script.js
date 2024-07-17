@@ -149,7 +149,7 @@ function verDetalles(id) {
             <p><strong>Teléfono:</strong> ${usuario.telefono}</p>
             <p><strong>Sexo:</strong> ${usuario.sexo}</p>
             <p><strong>Cargo:</strong> ${usuario.cargo}</p>
-            <p><strong>Ubicación:</strong> ${usuario.ubicacion || 'No especificada'}</p> // Añade esta línea
+            <p><strong>Ubicación:</strong> ${usuario.ubicacion || 'No especificada'}</p> 
             <p><strong>Correo:</strong> ${usuario.correo}</p>
             <p><strong>Fecha de Ingreso:</strong> ${usuario.fecha_ingreso}</p>
             <p><strong>Hora de Ingreso:</strong> ${formatTime(usuario.hora_ingreso)}</p>

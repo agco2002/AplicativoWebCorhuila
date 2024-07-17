@@ -1,3 +1,4 @@
+/*estilos_cabecera.css*/
 @font-face {
     font-family: 'Geomanist';
     src: url('path/to/geomanist-regular.woff2') format('woff2'),
@@ -20,11 +21,11 @@ body {
 
 .custom-logo {
     margin-right: 5cm;  /* Añade espacio entre el logo y el navbar */
-    transition: filter 0.3s ease;  /* Añade una transición suave */
+    transition: color 0.3s ease;  /* Añade una transición suave */
 }
 
 .custom-logo:hover {
-    filter: drop-shadow(0 0 4px #00ff00);  /* Añade una sombra verde al pasar el cursor */
+    filter: drop-shadow(0 0 4px #28a745);  /* Añade una sombra verde al pasar el cursor */
 }
 
 .custom-navbar {
@@ -37,16 +38,16 @@ body {
 }
 
 .nav-link:hover {
-    color: #00ff00 !important;
+    color: #28a745 !important;
 }
 
 .dropdown-toggle {
-    background-color: #00ff00 !important;
+    background-color: #28a745 !important;
     border: none;
 }
 
 .dropdown-toggle:hover {
-    background-color: #00cc00 !important;
+    background-color: #28a745 !important;
 }
 
 .dropdown-menu {
@@ -58,7 +59,7 @@ body {
 }
 
 .dropdown-item:hover {
-    background-color: #00ff00;
+    background-color: #28a745;
     color: #1a1a1a;
 }
 
@@ -68,16 +69,16 @@ body {
         padding: 10px;
         border-radius: 5px;
     }
-
+    
     .custom-container {
-        padding-left: 15px !important;  /* Ajusta el padding para pantallas pequeñas */
+        padding-left: 15px !important;
     }
     
     .custom-logo {
-        margin-right: 0;  /* Elimina el margen extra en pantallas pequeñas */
+        margin-right: 0;
     }
     
     .custom-navbar {
-        margin-left: 0;  /* Elimina el margen extra en pantallas pequeñas */
+        margin-left: 0;
     }
 }

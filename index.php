@@ -1,23 +1,35 @@
+<!--index.php-->
 <?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login.php');
+    exit();
+}
 require_once 'php/funciones.php';
 $usuarios = obtenerUsuarios();
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Usuarios</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap" rel="stylesheet">
     <link href="estilos.css" rel="stylesheet">
+    <link href="estilo_cabecera.css" rel="stylesheet">
+    <link href="estilo_footer.css" rel="stylesheet">
+
 </head>
 <body>
+    
+    <?php include 'cabecera.php'; ?>
+
     <div class="container mt-5">
-        <h1 class="mb-4">Gestión de Usuarios</h1>
-        <button class="btn btn-danger mb-3" onclick="cerrarSesion()">Cerrar Sesión</button>
-        <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#registroModal">Registrar Usuario</button>
-        <a href="registro_acciones.php" class="btn btn-info mb-3">Ver Registro de Acciones</a>
-        <input type="text" id="buscador" class="form-control mb-5" placeholder="Buscar usuarios...">
+        <h3 class="mb-4 text-center">Gestión de Usuarios</h3>
+        <button class=" mb-3 boton " data-bs-toggle="modal" data-bs-target="#registroModal">Registrar Usuario</button>
+        <input type="text" id="buscador" class="form-control mb-5" placeholder="Buscar usuarios..." style="border-color:  #28a745;">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -235,8 +247,10 @@ $usuarios = obtenerUsuarios();
         </div>
     </div>
 </div>
-
+<br><br>
+<?php include 'footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="script_cabecera.js"></script>
 </body>
 </html>

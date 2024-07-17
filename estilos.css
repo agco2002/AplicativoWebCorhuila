@@ -14,14 +14,17 @@ h1, h2 {
     color: #28a745;
 }
 
-.btn-success, .btn-primary {
+.boton{
     background-color: #28a745;
-    border-color: #28a745;
-}
-
-.btn-success:hover, .btn-primary:hover {
-    background-color: #218838;
-    border-color: #1e7e34;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+.boton:hover {
+    background-color: #24933e;
+    color: #ffffff;
 }
 
 .table {
@@ -98,3 +101,4 @@ h1, h2 {
     border-color: #f5c6cb;
     color: #721c24;
 }
+
