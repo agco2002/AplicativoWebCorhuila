@@ -1,20 +1,32 @@
 <?php
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header('Location: login.php');
-    exit();
-}
+// Obtener ID del evento y ID del participante
+$idEvento = $_GET['id_evento'];
+$idParticipante = $_GET['id_participante'];
+
+// Conectarse a la base de datos
+$db = new mysqli('localhost', 'root', '', 'corhuila');
+
+// Recuperar datos del participante actual
+$consultaParticipante = "SELECT nombre, identificación, correo FROM participantes WHERE id_participante = ? AND id_evento = ?";
+$stmtParticipante = $db->prepare($consultaParticipante);
+$stmtParticipante->bind_param('ii', $idParticipante, $idEvento);
+$stmtParticipante->execute();
+$stmtParticipante->bind_result($nombre, $identificación, $correo);
+$stmtParticipante->fetch();
+$stmtParticipante->close();
+
+$db->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear evento</title>
+    <title>Editar Participante - CORHUILA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap" rel="stylesheet">
-    <link href="estilo_crear_eventos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="styles/estilo_editar_participante.css" rel="stylesheet">
 </head>
 <body>
     <!-- Cabecera -->
@@ -32,10 +44,10 @@ if (!isset($_SESSION['usuario'])) {
                         <a class="nav-link" href="index.php">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Lista Eventos/crear_eventos.php">Crear Eventos</a>
+                        <a class="nav-link" href="crear_eventos.php">Crear Eventos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Lista Eventos/mostrar_eventos.php">Eventos</a>
+                        <a class="nav-link" href="mostrar_eventos.php">Eventos</a>
                     </li>
                 </ul>
                 <div class="dropdown">
@@ -52,44 +64,36 @@ if (!isset($_SESSION['usuario'])) {
 
     <!-- Contenido principal -->
     <div class="container mt-5">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title text-center mb-4">Crear evento</h1>
-                <form action="guardar_evento.php" method="post">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label for="titulo" class="form-label">Título:</label>
-                            <input type="text" class="form-control" id="titulo" name="titulo" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="iniciador" class="form-label">Iniciador:</label>
-                            <input type="text" class="form-control" id="iniciador" name="iniciador" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="cargo" class="form-label">Cargo:</label>
-                            <input type="text" class="form-control" id="cargo" name="cargo" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="ubicacion" class="form-label">Ubicación:</label>
-                            <input type="text" class="form-control" id="ubicacion" name="ubicacion" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="fecha" class="form-label">Fecha:</label>
-                            <input type="date" class="form-control" id="fecha" name="fecha" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="hora" class="form-label">Hora:</label>
-                            <input type="text" class="form-control" id="hora" name="hora" pattern="(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)" placeholder="hh:mm AM/PM" required>
-                        </div>
-                        <div class="col-12">
-                            <label for="descripcion" class="form-label">Descripción:</label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
-                        </div>
-                        <div class="col-12 mt-4">
-                            <button type="submit" class="btn btn-primary w-100">Crear evento</button>
-                        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Editar Participante</h2>
+                        <form action="actualizar_participante.php" method="post">
+                            <input type="hidden" name="id_evento" value="<?php echo htmlspecialchars($idEvento); ?>">
+                            <input type="hidden" name="id_participante" value="<?php echo htmlspecialchars($idParticipante); ?>">
+                            
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo htmlspecialchars($nombre); ?>" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="identificación" class="form-label">Identificación:</label>
+                                <input type="text" class="form-control" id="identificación" name="identificación" value="<?php echo htmlspecialchars($identificación); ?>" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo electrónico:</label>
+                                <input type="email" class="form-control" id="correo" name="correo" value="<?php echo htmlspecialchars($correo); ?>" required>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Actualizar Participante</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -157,6 +161,11 @@ if (!isset($_SESSION['usuario'])) {
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+    <script>
+        function cerrarSesion() {
+            // Implementa aquí la lógica para cerrar sesión
+            alert('Cerrar sesión');
+        }
+    </script>
 </body>
 </html>

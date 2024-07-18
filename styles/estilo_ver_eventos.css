@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap');
+
+body {
+    font-family: 'Geomanist', sans-serif;
+    background-color: #e8f5e9; /* Light green background */
+}
+
+/* Navbar styles */
+.navbar {
+    background: linear-gradient(45deg, #1a1a1a, #2c2c2c) !important;
+}
+
+.custom-container {
+    padding-left: 1rem !important;
+}
+
+.custom-logo {
+    transition: filter 0.3s ease;
+}
+
+.custom-logo:hover {
+    filter: drop-shadow(0 0 4px #28a745);
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #28a745 !important;
+}
+
+.dropdown-toggle {
+    background-color: #28a745 !important;
+    border: none;
+}
+
+.dropdown-toggle:hover {
+    background-color: #218838 !important;
+}
+
+.dropdown-menu {
+    background-color: #1a1a1a;
+}
+
+.dropdown-item {
+    color: #ffffff;
+}
+
+.dropdown-item:hover {
+    background-color: #28a745;
+    color: #1a1a1a;
+}
+
+/* Card styles */
+.card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.btn-custom {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Table styles */
+.table-responsive {
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table-success {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+/* Footer styles */
+.footer {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 40px 0;
+}
+
+.footer h2 {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+.footer h2:hover {
+    color: #28a745;
+}
+
+.footer-logo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    transition: filter 0.3s ease;
+}
+
+.footer-logo:hover {
+    filter: drop-shadow(0 0 10px #28a745);
+}
+
+.footer h5 {
+    color: #28a745;
+    margin-bottom: 15px;
+}
+
+.footer ul {
+    padding-left: 0;
+}
+
+.footer ul li {
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.footer ul li:hover, .footer p:hover {
+    color: #28a745;
+}
+
+.social-icons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.social-icon {
+    color: #fff;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #28a745;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+span {
+    color: #28a745;
+}
+
+/* Responsive styles */
+@media (max-width: 991px) {
+    .navbar-nav {
+        background-color: #1a1a1a;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .custom-container {
+        padding-left: 15px !important;
+    }
+
+    .custom-logo {
+        margin-right: 0;
+    }
+
+    .custom-navbar {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer h2 {
+        font-size: 24px;
+    }
+
+    .footer {
+        text-align: center;
+    }
+
+    .footer-logo {
+        margin: 0 auto 20px;
+        display: block;
+    }
+
+    .btn-custom {
+        margin-bottom: 10px;
+    }
+
+    .d-flex {
+        flex-direction: column;
+    }
+}
+
+/* Additional styles for ver_evento.php */
+.alert {
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.btn-warning, .btn-danger {
+    transition: all 0.3s ease;
+}
+
+.btn-warning:hover, .btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f8e9;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}

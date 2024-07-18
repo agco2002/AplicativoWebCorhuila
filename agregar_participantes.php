@@ -2,28 +2,17 @@
 // Conectarse a la base de datos
 $db = new mysqli('localhost', 'root', '', 'corhuila');
 
-// Recuperar la lista de eventos
-$consultaEventos = "SELECT id_evento, titulo, iniciador, cargo, fecha, hora, ubicacion FROM eventos ORDER BY fecha, hora";
-$stmtEventos = $db->prepare($consultaEventos);
-$stmtEventos->execute();
-$stmtEventos->bind_result($idEvento, $tituloEvento, $iniciadorEvento, $cargoEvento, $fechaEvento, $hora_24, $ubicacionEvento);
+// Obtener ID del evento
+$idEvento = $_GET['id_evento'];
 
-// Almacenar los eventos en un array
-$eventos = [];
-while ($stmtEventos->fetch()) {
-    $eventos[] = [
-        'id' => $idEvento,
-        'titulo' => $tituloEvento,
-        'iniciador' => $iniciadorEvento,
-        'cargo' => $cargoEvento,
-        'fecha' => $fechaEvento,
-        'hora' => date("h:i A", strtotime($hora_24)),
-        'ubicacion' => $ubicacionEvento
-    ];
-}
-
-$stmtEventos->close();
-$db->close();
+// Consultar datos del evento
+$consultaEvento = "SELECT titulo, iniciador, fecha, hora, ubicacion FROM eventos WHERE id_evento = ?";
+$stmtEvento = $db->prepare($consultaEvento);
+$stmtEvento->bind_param('i', $idEvento);
+$stmtEvento->execute();
+$stmtEvento->bind_result($tituloEvento, $iniciador, $fechaEvento, $horaEvento, $ubicacionEvento);
+$stmtEvento->fetch();
+$stmtEvento->close();
 ?>
 
 <!DOCTYPE html>
@@ -31,10 +20,10 @@ $db->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CORHUILA - Eventos</title>
+    <title>Agregar participantes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="styles/estilo_mostrar_eventos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="styles/estilo_agregar_participante.css" rel="stylesheet">
 </head>
 <body>
     <!-- Cabecera -->
@@ -72,39 +61,50 @@ $db->close();
 
     <!-- Contenido principal -->
     <div class="container mt-5">
-        <h1 class="text-center mb-5 text-success">Eventos</h1>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            <?php foreach ($eventos as $evento): ?>
-                <div class="col">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="ver_evento.php?id_evento=<?php echo $evento['id']; ?>">
-                                    <?php echo htmlspecialchars($evento['titulo']); ?>
-                                </a>
-                            </h5>
-                            <p class="card-text">
-                                <strong>Iniciador:</strong> <?php echo htmlspecialchars($evento['iniciador']); ?><br>
-                                <strong>Cargo:</strong> <?php echo htmlspecialchars($evento['cargo']); ?><br>
-                                <strong>Fecha:</strong> <?php echo htmlspecialchars($evento['fecha']); ?><br>
-                                <strong>Hora:</strong> <?php echo htmlspecialchars($evento['hora']); ?><br>
-                                <strong>Ubicación:</strong> <?php echo htmlspecialchars($evento['ubicacion']); ?>
-                            </p>
-                        </div>
-                        <div class="card-footer bg-transparent border-top-0">
-                            <a href="ver_evento.php?id_evento=<?php echo $evento['id']; ?>" class="btn btn-custom btn-sm w-100">Ver detalles</a>
-                        </div>
-                    </div>
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title text-center mb-4">Agregar participantes</h1>
+
+                <div class="mb-4">
+                    <h2 class="h4">Evento: <?php echo htmlspecialchars($tituloEvento); ?></h2>
+                    <h3 class="h5">Iniciador: <?php echo htmlspecialchars($iniciador); ?></h3>
+                    <p class="mb-1">Fecha: <?php echo htmlspecialchars($fechaEvento); ?> - Hora: <?php echo htmlspecialchars($horaEvento); ?></p>
+                    <p>Ubicación: <?php echo htmlspecialchars($ubicacionEvento); ?></p>
                 </div>
-            <?php endforeach; ?>
+
+                <form action="Lista Eventos/guardar_participantes.php" method="post">
+                    <input type="hidden" name="id_evento" value="<?php echo htmlspecialchars($idEvento); ?>">
+
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="identificación" class="form-label">Identificación:</label>
+                        <input type="text" class="form-control" id="identificación" name="identificación" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo electrónico:</label>
+                        <input type="email" class="form-control" id="correo" name="correo" required>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Agregar participante</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+    <br><br>
 
     <!-- Footer -->
-    <footer class="footer mt-5">
+    <footer class="footer">
         <div class="container-fluid custom-container">
-            <h2 class="text-center">Corporación Universitaria del Huila</h2>
-            <div class="row mt-4">
+            <h1 class="text-center">Corporación Universitaria del Huila</h1>
+            <br>
+            <div class="row">
                 <div class="col-md-2 col-sm-12 mb-3">
                     <img src="assets/CORHUILA.png" alt="Logo" class="footer-logo">
                 </div>
@@ -139,7 +139,7 @@ $db->close();
                     <h5>Contacto</h5>
                     <ul class="list-unstyled">
                         <li>Teléfono: (123) 456-7890</li>
-                        <li>Email: info@corhuila.edu.co</li>
+                        <li>Email: info@tuempresa.com</li>
                         <li>Dirección: Calle Principal #123</li>
                     </ul>
                 </div>
@@ -162,7 +162,6 @@ $db->close();
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js" ></script>
-    
+    <script src="js/script.js"></script>
 </body>
 </html>

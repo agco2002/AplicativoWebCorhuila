@@ -1,29 +1,21 @@
 <?php
+// Obtener ID del evento
+$idEvento = $_GET['id_evento'];
+
 // Conectarse a la base de datos
 $db = new mysqli('localhost', 'root', '', 'corhuila');
 
-// Recuperar la lista de eventos
-$consultaEventos = "SELECT id_evento, titulo, iniciador, cargo, fecha, hora, ubicacion FROM eventos ORDER BY fecha, hora";
-$stmtEventos = $db->prepare($consultaEventos);
-$stmtEventos->execute();
-$stmtEventos->bind_result($idEvento, $tituloEvento, $iniciadorEvento, $cargoEvento, $fechaEvento, $hora_24, $ubicacionEvento);
+// Consultar datos del evento
+$consulta = "SELECT titulo, iniciador, cargo, descripcion, fecha, hora, ubicacion FROM eventos WHERE id_evento = ?";
+$stmt = $db->prepare($consulta);
+$stmt->bind_param('i', $idEvento);
+$stmt->execute();
+$stmt->bind_result($tituloEvento, $iniciadorEvento, $cargoEvento, $descripcionEvento, $fechaEvento, $hora_24, $ubicacionEvento);
+$stmt->fetch();
+$stmt->close();
 
-// Almacenar los eventos en un array
-$eventos = [];
-while ($stmtEventos->fetch()) {
-    $eventos[] = [
-        'id' => $idEvento,
-        'titulo' => $tituloEvento,
-        'iniciador' => $iniciadorEvento,
-        'cargo' => $cargoEvento,
-        'fecha' => $fechaEvento,
-        'hora' => date("h:i A", strtotime($hora_24)),
-        'ubicacion' => $ubicacionEvento
-    ];
-}
-
-$stmtEventos->close();
-$db->close();
+// Convertir hora de 24 horas a formato AM/PM
+$hora_ampm = date("h:i A", strtotime($hora_24));
 ?>
 
 <!DOCTYPE html>
@@ -31,13 +23,14 @@ $db->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CORHUILA - Eventos</title>
+    <title>Ver evento - CORHUILA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="styles/estilo_mostrar_eventos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap" rel="stylesheet">
+    <link href="styles/estilo_ver_eventos.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Cabecera -->
+    <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid custom-container">
             <a class="navbar-brand custom-logo" href="#">
@@ -70,34 +63,64 @@ $db->close();
         </div>
     </nav>
 
-    <!-- Contenido principal -->
+    <!-- Main Content -->
     <div class="container mt-5">
-        <h1 class="text-center mb-5 text-success">Eventos</h1>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            <?php foreach ($eventos as $evento): ?>
-                <div class="col">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="ver_evento.php?id_evento=<?php echo $evento['id']; ?>">
-                                    <?php echo htmlspecialchars($evento['titulo']); ?>
-                                </a>
-                            </h5>
-                            <p class="card-text">
-                                <strong>Iniciador:</strong> <?php echo htmlspecialchars($evento['iniciador']); ?><br>
-                                <strong>Cargo:</strong> <?php echo htmlspecialchars($evento['cargo']); ?><br>
-                                <strong>Fecha:</strong> <?php echo htmlspecialchars($evento['fecha']); ?><br>
-                                <strong>Hora:</strong> <?php echo htmlspecialchars($evento['hora']); ?><br>
-                                <strong>Ubicación:</strong> <?php echo htmlspecialchars($evento['ubicacion']); ?>
-                            </p>
-                        </div>
-                        <div class="card-footer bg-transparent border-top-0">
-                            <a href="ver_evento.php?id_evento=<?php echo $evento['id']; ?>" class="btn btn-custom btn-sm w-100">Ver detalles</a>
-                        </div>
-                    </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h1 class="card-title text-success"><?php echo htmlspecialchars($tituloEvento); ?></h1>
+                <h2 class="card-subtitle mb-2 text-muted"><?php echo htmlspecialchars($iniciadorEvento); ?> - <?php echo htmlspecialchars($cargoEvento); ?></h2>
+                <p class="card-text"><?php echo htmlspecialchars($descripcionEvento); ?></p>
+                <p class="card-text"><strong>Fecha:</strong> <?php echo htmlspecialchars($fechaEvento); ?> - <strong>Hora:</strong> <?php echo htmlspecialchars($hora_ampm); ?></p>
+                <p class="card-text"><strong>Ubicación:</strong> <?php echo htmlspecialchars($ubicacionEvento); ?></p>
+                
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="agregar_participantes.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-custom">Agregar participantes</a>
+                    <a href="generar_pdf.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-custom">Descargar PDF</a>
+                    <a href="editar_evento.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-warning">Editar evento</a>
+                    <a href="eliminar_evento.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-danger">Eliminar evento</a>
                 </div>
-            <?php endforeach; ?>
+            </div>
         </div>
+
+        <?php
+        require_once 'php/conexion.php';
+
+        if ($idEvento) {
+            $sql = "SELECT id_participante, nombre, identificación, correo FROM participantes WHERE id_evento = ?";
+            $stmtParticipantes = $conn->prepare($sql);
+            $stmtParticipantes->bind_param("i", $idEvento);
+            $stmtParticipantes->execute();
+            $result = $stmtParticipantes->get_result();
+
+            if ($result->num_rows > 0) {
+                echo "<h3 class='text-success mb-3'>Participantes actuales:</h3>";
+                echo "<div class='table-responsive'>";
+                echo "<table class='table table-hover'>";
+                echo "<thead class='table-success'><tr><th>Nombre</th><th>Identificación</th><th>Correo</th><th>Acciones</th></tr></thead>";
+                echo "<tbody>";
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['identificación']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['correo']) . "</td>";
+                    echo "<td>
+                        <a href='editar_participante.php?id_evento=$idEvento&id_participante={$row['id_participante']}' class='btn btn-sm btn-warning me-2'>Editar</a>
+                        <a href='eliminar_participante.php?id_evento=$idEvento&id_participante={$row['id_participante']}' class='btn btn-sm btn-danger'>Eliminar</a>
+                    </td>";
+                    echo "</tr>";
+                }
+                echo "</tbody></table>";
+                echo "</div>";
+            } else {
+                echo "<p class='alert alert-info'>No hay participantes registrados para este evento.</p>";
+            }
+        } else {
+            echo "<p class='alert alert-danger'>No se especificó un ID de evento válido.</p>";
+        }
+
+        $stmtParticipantes->close();
+        $db->close();
+        ?>
     </div>
 
     <!-- Footer -->
@@ -162,7 +185,6 @@ $db->close();
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js" ></script>
-    
+    <script src="js/script.js"></script>
 </body>
 </html>

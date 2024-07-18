@@ -1,40 +1,20 @@
 <?php
-// Conectarse a la base de datos
-$db = new mysqli('localhost', 'root', '', 'corhuila');
-
-// Recuperar la lista de eventos
-$consultaEventos = "SELECT id_evento, titulo, iniciador, cargo, fecha, hora, ubicacion FROM eventos ORDER BY fecha, hora";
-$stmtEventos = $db->prepare($consultaEventos);
-$stmtEventos->execute();
-$stmtEventos->bind_result($idEvento, $tituloEvento, $iniciadorEvento, $cargoEvento, $fechaEvento, $hora_24, $ubicacionEvento);
-
-// Almacenar los eventos en un array
-$eventos = [];
-while ($stmtEventos->fetch()) {
-    $eventos[] = [
-        'id' => $idEvento,
-        'titulo' => $tituloEvento,
-        'iniciador' => $iniciadorEvento,
-        'cargo' => $cargoEvento,
-        'fecha' => $fechaEvento,
-        'hora' => date("h:i A", strtotime($hora_24)),
-        'ubicacion' => $ubicacionEvento
-    ];
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login.php');
+    exit();
 }
-
-$stmtEventos->close();
-$db->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CORHUILA - Eventos</title>
+    <title>Crear evento</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="styles/estilo_mostrar_eventos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap" rel="stylesheet">
+    <link href="styles/estilo_crear_eventos.css" rel="stylesheet">
 </head>
 <body>
     <!-- Cabecera -->
@@ -72,39 +52,54 @@ $db->close();
 
     <!-- Contenido principal -->
     <div class="container mt-5">
-        <h1 class="text-center mb-5 text-success">Eventos</h1>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            <?php foreach ($eventos as $evento): ?>
-                <div class="col">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="ver_evento.php?id_evento=<?php echo $evento['id']; ?>">
-                                    <?php echo htmlspecialchars($evento['titulo']); ?>
-                                </a>
-                            </h5>
-                            <p class="card-text">
-                                <strong>Iniciador:</strong> <?php echo htmlspecialchars($evento['iniciador']); ?><br>
-                                <strong>Cargo:</strong> <?php echo htmlspecialchars($evento['cargo']); ?><br>
-                                <strong>Fecha:</strong> <?php echo htmlspecialchars($evento['fecha']); ?><br>
-                                <strong>Hora:</strong> <?php echo htmlspecialchars($evento['hora']); ?><br>
-                                <strong>Ubicación:</strong> <?php echo htmlspecialchars($evento['ubicacion']); ?>
-                            </p>
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title text-center mb-4">Crear evento</h1>
+                <form action="guardar_evento.php" method="post">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="titulo" class="form-label">Título:</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" required>
                         </div>
-                        <div class="card-footer bg-transparent border-top-0">
-                            <a href="ver_evento.php?id_evento=<?php echo $evento['id']; ?>" class="btn btn-custom btn-sm w-100">Ver detalles</a>
+                        <div class="col-md-6">
+                            <label for="iniciador" class="form-label">Iniciador:</label>
+                            <input type="text" class="form-control" id="iniciador" name="iniciador" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cargo" class="form-label">Cargo:</label>
+                            <input type="text" class="form-control" id="cargo" name="cargo" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="ubicacion" class="form-label">Ubicación:</label>
+                            <input type="text" class="form-control" id="ubicacion" name="ubicacion" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fecha" class="form-label">Fecha:</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="hora" class="form-label">Hora:</label>
+                            <input type="text" class="form-control" id="hora" name="hora" pattern="(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)" placeholder="hh:mm AM/PM" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="descripcion" class="form-label">Descripción:</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-primary w-100">Crear evento</button>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer class="footer mt-5">
         <div class="container-fluid custom-container">
-            <h2 class="text-center">Corporación Universitaria del Huila</h2>
-            <div class="row mt-4">
+            <h1 class="text-center">Corporación Universitaria del Huila</h1>
+            <br>
+            <div class="row">
                 <div class="col-md-2 col-sm-12 mb-3">
                     <img src="assets/CORHUILA.png" alt="Logo" class="footer-logo">
                 </div>
@@ -139,7 +134,7 @@ $db->close();
                     <h5>Contacto</h5>
                     <ul class="list-unstyled">
                         <li>Teléfono: (123) 456-7890</li>
-                        <li>Email: info@corhuila.edu.co</li>
+                        <li>Email: info@tuempresa.com</li>
                         <li>Dirección: Calle Principal #123</li>
                     </ul>
                 </div>
@@ -162,7 +157,6 @@ $db->close();
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js" ></script>
-    
+    <script src="js/script.js"></script>
 </body>
 </html>
