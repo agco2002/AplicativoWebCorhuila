@@ -1,37 +1,36 @@
-/*estilos.css*/
 body {
+    font-family: 'Geomanist', sans-serif;
     background-color: #f0f8f0;
 }
 
-.container {
-    background-color: #ffffff;
+.custom-container {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
+h1, h2, h3 {
     color: #28a745;
 }
 
-.boton{
+.custom-btn {
     background-color: #28a745;
     color: #ffffff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-  }
-  
-.boton:hover {
+}
+
+.custom-btn:hover {
     background-color: #24933e;
     color: #ffffff;
 }
 
-.table {
+.custom-table {
     background-color: #ffffff;
 }
 
-.table thead {
+.custom-table thead {
     background-color: #28a745;
     color: #ffffff;
 }
@@ -51,7 +50,7 @@ h1, h2 {
     color: #ffffff;
 }
 
-.form-control:focus, .form-select:focus {
+.custom-input:focus, .form-select:focus {
     border-color: #28a745;
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
 }
@@ -80,12 +79,12 @@ h1, h2 {
     border-left: 3px solid #28a745;
 }
 
-.btn-danger {
+.custom-btn-danger {
     background-color: #dc3545;
     border-color: #dc3545;
 }
 
-.btn-danger:hover {
+.custom-btn-danger:hover {
     background-color: #c82333;
     border-color: #bd2130;
 }
@@ -102,3 +101,239 @@ h1, h2 {
     color: #721c24;
 }
 
+/* Estilos de la cabecera */
+.custom-navbar {
+    background: linear-gradient(45deg, #1a1a1a, #2c2c2c) !important;
+}
+
+.custom-container {
+    padding-left: 3cm !important;
+}
+
+.custom-logo {
+    margin-right: 5cm;
+    transition: filter 0.3s ease;
+}
+
+.custom-logo:hover {
+    filter: drop-shadow(0 0 4px #28a745);
+}
+
+.custom-navbar-collapse {
+    margin-left: 5cm;
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #28a745 !important;
+}
+
+.custom-dropdown-toggle {
+    background-color: #28a745 !important;
+    border: none;
+}
+
+.custom-dropdown-toggle:hover {
+    background-color: #24933e !important;
+}
+
+.dropdown-menu {
+    background-color: #1a1a1a;
+}
+
+.dropdown-item {
+    color: #ffffff;
+}
+
+.dropdown-item:hover {
+    background-color: #28a745;
+    color: #1a1a1a;
+}
+
+/* Estilos del footer */
+.custom-footer {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 40px 0;
+}
+
+.footer-title {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+.footer-title:hover {
+    color: #28a745;
+}
+
+.footer-logo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    transition: filter 0.3s ease;
+}
+
+.footer-logo:hover {
+    filter: drop-shadow(0 0 10px #28a745);
+}
+
+.custom-footer h5 {
+    color: #28a745;
+    margin-bottom: 15px;
+}
+
+.custom-footer ul {
+    padding-left: 0;
+}
+
+.custom-footer ul li {
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.custom-footer ul li:hover, .custom-footer p:hover {
+    color: #28a745;
+}
+
+.social-icons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.social-icon {
+    color: #fff;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #28a745;
+}
+
+.footer-divider {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.designer-name {
+    color: #28a745;
+}
+
+
+/* Estilos responsivos */
+@media (max-width: 991px) {
+    .navbar-nav {
+        background-color: #1a1a1a;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .custom-container {
+        padding-left: 15px !important;
+    }
+
+    .custom-logo {
+        margin-right: 0;
+    }
+
+    .custom-navbar-collapse {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-title {
+        font-size: 24px;
+    }
+
+    .custom-footer {
+        text-align: center;
+    }
+
+    .footer-logo {
+        margin: 0 auto 20px;
+        display: block;
+    }
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.custom-btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+}
+
+.custom-btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+    color: #000;
+}
+
+.custom-btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: #fff;
+}
+
+.custom-btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+    color: #fff;
+}
+
+/* Mejoras en la accesibilidad y contraste */
+.custom-input::placeholder {
+    color: #6c757d;
+}
+
+.custom-navbar .nav-link:focus,
+.custom-dropdown-toggle:focus,
+.custom-btn:focus,
+.custom-input:focus {
+    outline: 2px solid #28a745;
+    outline-offset: 2px;
+}
+
+/* Animaciones sutiles */
+.custom-btn, .nav-link, .social-icon {
+    transition: all 0.3s ease;
+}
+
+.custom-btn:active, .nav-link:active, .social-icon:active {
+    transform: scale(0.95);
+}
+
+/* Mejoras en la legibilidad */
+.custom-footer p, .custom-footer li {
+    line-height: 1.6;
+}
+
+/* Estilo para el scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #28a745;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #24933e;
+}
