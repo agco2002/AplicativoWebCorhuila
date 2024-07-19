@@ -69,27 +69,80 @@ body {
     justify-content: center;
 }
 
+/* Estilos para el formulario */
 .form-container {
     width: 100%;
     max-width: 900px;
     margin: 2rem auto;
-    padding: 20px;
-    background-color: white;
+    padding: 30px;
+    background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.form-container:hover {
+    box-shadow: 0 0 30px rgba(40,167,69,0.2);
+}
+
+h1 {
+    color: #28a745;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-label {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.3s ease;
+    background-color: #e8f5e9; /* Fondo verde claro para los inputs */
+}
+
+.form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40,167,69,0.25);
+    transform: translateY(-2px);
+}
+
+textarea.form-control {
+    min-height: 120px;
 }
 
 .btn-custom {
     background-color: #28a745;
-    border-color: #28a745;
-    transition: all 0.3s;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
 }
 
 .btn-custom:hover {
     background-color: #218838;
-    border-color: #1e7e34;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+/* Efecto de resaltado para los inputs */
+@keyframes highlight {
+    0% { background-color: #e8f5e9; }
+    50% { background-color: #c8e6c9; }
+    100% { background-color: #e8f5e9; }
+}
+
+.form-control:not(:placeholder-shown) {
+    animation: highlight 1s ease;
 }
 
 /* Estilos del footer */
@@ -166,6 +219,7 @@ span {
     color: #28a745;
 }
 
+/* Mejoras adicionales para la responsividad */
 @media (max-width: 991px) {
     .navbar-nav {
         background-color: #1a1a1a;
@@ -198,5 +252,17 @@ span {
     .footer-logo {
         margin: 0 auto 20px;
         display: block;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .btn-custom {
+        width: 100%;
     }
 }
