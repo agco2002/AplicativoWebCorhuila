@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Geomanist', sans-serif;
-    background-color: #e8f5e9; /* Light green background */
+    background-color: #e8f5e9;
 }
 
 /* Navbar styles */
@@ -53,27 +53,137 @@ body {
     color: #1a1a1a;
 }
 
+/* New styles for the "Eventos" title */
+h1.text-center.mb-5.text-success {
+    color: #1f9f4c !important; /* Darker green mixed with black */
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    overflow: hidden;
+}
+
+h1.text-center.mb-5.text-success::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #0d3320, transparent);
+    animation: animate 2s linear infinite;
+}
+
+h1.text-center.mb-5.text-success::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #0d3320, transparent);
+    animation: animate 2s linear infinite reverse;
+}
+
+@keyframes animate {
+    0% {
+        left: -100%;
+    }
+    50%, 100% {
+        left: 100%;
+    }
+}
+
 /* Card styles */
 .card {
     transition: all 0.3s ease;
     border: none;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    background-color: #ffffff; /* White background for cards */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    overflow: hidden;
+    border-radius: 15px;
+    position: relative;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.2)
+    );
+    transform: rotate(-45deg);
+    z-index: 0;
+    transition: all 0.5s ease;
+}
+
+.card:hover::before {
+    top: -75%;
+    left: -75%;
+}
+
+.card-body {
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem;
+}
+
+.card-title {
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.card-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #28a745;
+    transition: width 0.3s ease;
+}
+
+.card:hover .card-title::after {
+    width: 100%;
 }
 
 .card-title a {
     color: #28a745;
     text-decoration: none;
     font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
 }
 
 .card-title a:hover {
-    text-decoration: underline;
+    color: #218838;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.card-text strong {
+    color: #333;
+    display: inline-block;
+    width: 80px;
 }
 
 .btn-custom {
@@ -81,6 +191,33 @@ body {
     border-color: #28a745;
     color: white;
     transition: all 0.3s ease;
+    width: 100%;
+    padding: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-custom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: all 0.5s ease;
+}
+
+.btn-custom:hover::before {
+    left: 100%;
 }
 
 .btn-custom:hover {
@@ -170,15 +307,15 @@ span {
         padding: 10px;
         border-radius: 5px;
     }
-
+    
     .custom-container {
         padding-left: 15px !important;
     }
-
+    
     .custom-logo {
         margin-right: 0;
     }
-
+    
     .custom-navbar {
         margin-left: 0;
     }
@@ -188,13 +325,29 @@ span {
     .footer h2 {
         font-size: 24px;
     }
-
+    
     .footer {
         text-align: center;
     }
-
+    
     .footer-logo {
         margin: 0 auto 20px;
         display: block;
     }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.5s ease-out;
 }

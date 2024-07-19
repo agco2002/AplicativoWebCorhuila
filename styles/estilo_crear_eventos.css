@@ -1,13 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap');
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Geomanist', sans-serif;
     background-color: #e8f5e9;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Estilos de la cabecera */
 .navbar {
     background: linear-gradient(45deg, #1a1a1a, #2c2c2c) !important;
+    position: relative;
+    z-index: 1000;
 }
 
 .custom-container {
@@ -16,41 +27,66 @@ body {
 
 .custom-logo {
     margin-right: 5cm;
-    transition: filter 0.3s ease;
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .custom-logo:hover {
     filter: drop-shadow(0 0 4px #2e7d32);
+    transform: scale(1.05);
 }
 
-.custom-navbar {
+.custom-navbar-collapse {
     margin-left: 5cm;
+    display: flex;
+     justify-content: center;
 }
 
 .navbar-brand, .nav-link {
     color: #ffffff !important;
     transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #28a745;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
 }
 
 .nav-link:hover {
     color: #4caf50 !important;
+    transform: translateY(-2px);
 }
 
 .dropdown-toggle {
-    background-color: #2e7d32 !important;
+    background-color: #28a745 !important;
     border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .dropdown-toggle:hover {
-    background-color: #1b5e20 !important;
+    background-color: #24933e !important;
+    transform: scale(1.05);
 }
 
 .dropdown-menu {
     background-color: #1a1a1a;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .dropdown-item {
     color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dropdown-item:hover {
@@ -61,6 +97,12 @@ body {
 /* Estilos del contenido principal */
 .container {
     max-width: 800px;
+    margin: 0 auto;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 0;
 }
 
 .card {
@@ -69,13 +111,13 @@ body {
     background-color: #ffffff;
     border-radius: 8px;
     padding: 20px;
-    margin-top: 20px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: fadeIn 0.5s ease-in-out;
 }
 
 .card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
 .card-title {
@@ -86,21 +128,23 @@ body {
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .card-title:hover {
     color: #4caf50;
+    transform: scale(1.05);
 }
 
 .form-label {
     font-weight: bold;
     color: #2e7d32;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .form-label:hover {
     color: #4caf50;
+    transform: translateX(5px);
 }
 
 .form-control {
@@ -137,33 +181,48 @@ body {
     background-color: #1a1a1a;
     color: #fff;
     padding: 40px 0;
+    flex-shrink: 0;
 }
 
 .footer h1 {
     font-size: 28px;
     color: #fff;
     margin-bottom: 20px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 .footer h1:hover {
     color: #4caf50;
+    transform: translate(5px);
 }
 
 .footer-logo {
     max-width: 100%;
     height: auto;
     margin-bottom: 20px;
-    transition: filter 0.3s ease;
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .footer-logo:hover {
     filter: drop-shadow(0 0 10px #4caf50);
+    transform: scale(1.05);
 }
 
 .footer h5 {
     color: #4caf50;
     margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.footer h5:hover {
+    transform: translateX(5px);
 }
 
 .footer ul {
@@ -172,11 +231,12 @@ body {
 
 .footer ul li {
     margin-bottom: 10px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .footer ul li:hover, .footer p:hover {
     color: #4caf50;
+    transform: translateX(5px);
 }
 
 .social-icons {
@@ -188,11 +248,12 @@ body {
     color: #fff;
     font-size: 24px;
     margin: 0 10px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-icon:hover {
-    color: #4caf50;
+    color: #28a745;
+    transform: scale(1.2) rotate(15deg);
 }
 
 hr {
@@ -222,10 +283,41 @@ span {
         background-color: #1a1a1a;
         padding: 10px;
         border-radius: 5px;
+        animation: slideDown 0.3s ease-in-out;
+    }
+    
+    @keyframes slideDown {
+        from { transform: translateY(-20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
     }
     
     .custom-container {
-        padding-left: 15px !important; } 
-    
+        padding-left: 15px !important;
     }
     
+    .custom-logo {
+        margin-right: 0;
+    }
+    
+    .custom-navbar {
+        margin-left: 0;
+    }
+}
+
+/* Estilo para el scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #28a745;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #24933e;
+}
