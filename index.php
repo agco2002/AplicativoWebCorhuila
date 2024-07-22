@@ -53,7 +53,7 @@ $usuarios = obtenerUsuarios();
     </nav>
     <!-- Contenido principal -->
     <div class="container mt-5 custom-container">
-        <h3 class="mb-4 text-center">Gestión de Usuarios</h3>
+        <h3 class="text-center mb-5 text-success">Gestión de Usuarios</h3>
         <button class="mb-3 btn custom-btn" data-bs-toggle="modal" data-bs-target="#registroModal">Registrar Usuario</button>
         <input type="text" id="buscador" class="form-control mb-5 custom-input" placeholder="Buscar usuarios...">
         <div class="table-responsive">

@@ -1,4 +1,12 @@
 <?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login.php');
+    exit();
+}
+?>
+
+<?php
 // Obtener ID del evento
 $idEvento = $_GET['id_evento'];
 
@@ -77,7 +85,7 @@ $hora_ampm = date("h:i A", strtotime($hora_24));
                     <a href="agregar_participantes.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-custom">Agregar participantes</a>
                     <a href="generar_pdf.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-custom">Descargar PDF</a>
                     <a href="editar_evento.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-warning">Editar evento</a>
-                    <a href="eliminar_evento.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-danger">Eliminar evento</a>
+                    <a href="Lista Eventos/eliminar_evento.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-danger">Eliminar evento</a>
                 </div>
             </div>
         </div>

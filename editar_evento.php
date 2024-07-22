@@ -1,4 +1,12 @@
 <?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login.php');
+    exit();
+}
+?>
+
+<?php
 // Obtener ID del evento
 $idEvento = $_GET['id_evento'];
 
@@ -27,7 +35,8 @@ $db->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Evento</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap" rel="stylesheet">
     <link href="styles/estilo_editar_eventos.css" rel="stylesheet">
 </head>
 <body>
@@ -65,51 +74,52 @@ $db->close();
     </nav>
 
     <!-- Contenido principal -->
-    <div class="container">
-        <div class="form-container">
-            <h1 class="text-center mb-4">Editar Evento</h1>
-            <form action="actualizar_evento.php" method="post">
-                <input type="hidden" name="id_evento" value="<?php echo $idEvento; ?>">
-                
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="titulo" class="form-label">Título:</label>
-                        <input type="text" class="form-control" id="titulo" name="titulo" value="<?php echo $titulo; ?>" required>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center mb-5 text-success">Editar evento</h1>
+                <form action="actualizar_evento.php" method="post">
+                    <input type="hidden" name="id_evento" value="<?php echo $idEvento; ?>">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="titulo" class="form-label">Título:</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" value="<?php echo $titulo; ?>" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="iniciador" class="form-label">Iniciador:</label>
+                            <input type="text" class="form-control" id="iniciador" name="iniciador" value="<?php echo $iniciador; ?>" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cargo" class="form-label">Cargo:</label>
+                            <input type="text" class="form-control" id="cargo" name="cargo" value="<?php echo $cargo; ?>" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="ubicacion" class="form-label">Ubicación:</label>
+                            <input type="text" class="form-control" id="ubicacion" name="ubicacion" value="<?php echo $ubicacion; ?>" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fecha" class="form-label">Fecha:</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" value="<?php echo $fecha; ?>" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="hora" class="form-label">Hora:</label>
+                            <input type="text" class="form-control" id="hora" name="hora" value="<?php echo $hora_ampm; ?>" pattern="(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)" placeholder="hh:mm AM/PM" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="descripcion" class="form-label">Descripción:</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><?php echo $descripcion; ?></textarea>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-success w-100">Actualizar evento</button>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="iniciador" class="form-label">Iniciador:</label>
-                        <input type="text" class="form-control" id="iniciador" name="iniciador" value="<?php echo $iniciador; ?>" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="cargo" class="form-label">Cargo:</label>
-                        <input type="text" class="form-control" id="cargo" name="cargo" value="<?php echo $cargo; ?>" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="ubicacion" class="form-label">Ubicación:</label>
-                        <input type="text" class="form-control" id="ubicacion" name="ubicacion" value="<?php echo $ubicacion; ?>" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="fecha" class="form-label">Fecha:</label>
-                        <input type="date" class="form-control" id="fecha" name="fecha" value="<?php echo $fecha; ?>" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="hora" class="form-label">Hora:</label>
-                        <input type="text" class="form-control" id="hora" name="hora" value="<?php echo $hora_ampm; ?>" pattern="(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)" placeholder="hh:mm AM/PM" required>
-                    </div>
-                    <div class="col-12">
-                        <label for="descripcion" class="form-label">Descripción:</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required><?php echo $descripcion; ?></textarea>
-                    </div>
-                    <div class="col-12 text-center mt-4">
-                        <button type="submit" class="btn btn-custom btn-lg">Actualizar Evento</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer mt-5">
         <div class="container-fluid custom-container">
             <h1 class="text-center">Corporación Universitaria del Huila</h1>
             <br>

@@ -1,13 +1,25 @@
+/*estilo_editar_participante.css*/
 @import url('https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
 
 body {
     font-family: 'Geomanist', sans-serif;
     background-color: #e8f5e9;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Estilos de la cabecera */
 .navbar {
     background: linear-gradient(45deg, #1a1a1a, #2c2c2c) !important;
+    position: relative;
+    z-index: 1000;
 }
 
 .custom-container {
@@ -16,131 +28,206 @@ body {
 
 .custom-logo {
     margin-right: 5cm;
-    transition: filter 0.3s ease;
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .custom-logo:hover {
-    filter: drop-shadow(0 0 4px #28a745);
+    filter: drop-shadow(0 0 4px #2e7d32);
+    transform: scale(1.05);
 }
 
-.custom-navbar {
+.navbar-collapse {
     margin-left: 5cm;
+    display: flex;
+    justify-content: center;
 }
 
 .navbar-brand, .nav-link {
     color: #ffffff !important;
     transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #28a745;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
 }
 
 .nav-link:hover {
     color: #28a745 !important;
+    transform: translateY(-2px);
 }
 
 .dropdown-toggle {
     background-color: #28a745 !important;
     border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .dropdown-toggle:hover {
-    background-color: #218838 !important;
+    background-color: #24933e !important;
+    transform: scale(1.05);
 }
 
 .dropdown-menu {
     background-color: #1a1a1a;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .dropdown-item {
     color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dropdown-item:hover {
-    background-color: #28a745;
+    background-color: #4caf50;
     color: #1a1a1a;
 }
 
-/* Estilos del formulario */
+/* Estilos del contenido principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 0;
+}
+
 .card {
     border: none;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    animation: fadeInUp 0.5s ease-out;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
-.card-body {
-    background-color: #ffffff;
-    padding: 2rem;
-}
-
-.card-title {
-    color: #28a745;
+h1.text-center.mb-5.text-success {
+    color: #1f9f4c !important;
+    font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    display: block;
+    padding: 10px 20px;
+    overflow: hidden;
+    text-align: center;
+    margin: 0 auto;
+    max-width: fit-content;
+}
+
+h1.text-center.mb-5.text-success::before,
+h1.text-center.mb-5.text-success::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #0d3320, transparent);
+    animation: animate 2s linear infinite;
+}
+
+h1.text-center.mb-5.text-success::before {
+    top: 0;
+    left: -100%;
+}
+
+h1.text-center.mb-5.text-success::after {
+    bottom: 0;
+    right: -100%;
+    animation-delay: 1s;
+}
+
+@keyframes animate {
+    0% {
+        left: -100%;
+    }
+    50%, 100% {
+        left: 100%;
+    }
 }
 
 .form-label {
-    color: #333;
-    font-weight: 600;
+    font-weight: bold;
+    color: #4caf50;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.form-label:hover {
+    color: #4caf50;
+    transform: translateX(5px);
 }
 
 .form-control {
-    border-radius: 10px;
-    border: 2px solid #e0e0e0;
-    background-color: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    background-color: #c8e6c9;
     transition: all 0.3s ease;
-    padding: 0.75rem 1rem;
+    animation: slideIn 0.5s ease-in-out;
 }
 
 .form-control:focus {
-    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
-    border-color: #28a745;
-    background-color: #ffffff;
+    border-color: #4caf50;
+    box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+    background-color: #e8f5e9;
 }
 
-.btn-primary {
+.btn-success {
     background-color: #28a745;
-    border-color: #28a745;
-    transition: all 0.3s ease;
-    padding: 0.75rem 2rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    font-size: 1.2rem;
+    margin-top: 20px;
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
+    z-index: 1;
 }
 
-.btn-primary:hover {
-    background-color: #218838;
-    border-color: #1e7e34;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.btn-primary::after {
+.btn-success:before {
     content: '';
-    display: block;
     position: absolute;
+    top: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
-    background-repeat: no-repeat;
-    background-position: 50%;
-    transform: scale(10, 10);
-    opacity: 0;
-    transition: transform .5s, opacity 1s;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.4s;
+    z-index: -1;
 }
 
-.btn-primary:active::after {
-    transform: scale(0, 0);
-    opacity: .3;
-    transition: 0s;
+.btn-success:hover:before {
+    left: 100%;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+    transform: translateY(-3px);
+}
+
+.btn-success:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.4);
 }
 
 /* Estilos del footer */
@@ -148,33 +235,48 @@ body {
     background-color: #1a1a1a;
     color: #fff;
     padding: 40px 0;
+    flex-shrink: 0;
 }
 
 .footer h1 {
     font-size: 28px;
     color: #fff;
     margin-bottom: 20px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 .footer h1:hover {
     color: #28a745;
+    transform: translate(5px);
 }
 
 .footer-logo {
     max-width: 100%;
     height: auto;
     margin-bottom: 20px;
-    transition: filter 0.3s ease;
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .footer-logo:hover {
-    filter: drop-shadow(0 0 10px #28a745);
+    filter: drop-shadow(0 0 10px #4caf50);
+    transform: scale(1.05);
 }
 
 .footer h5 {
-    color: #28a745;
+    color: #4caf50;
     margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.footer h5:hover {
+    transform: translateX(5px);
 }
 
 .footer ul {
@@ -183,11 +285,12 @@ body {
 
 .footer ul li {
     margin-bottom: 10px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .footer ul li:hover, .footer p:hover {
     color: #28a745;
+    transform: translateX(5px);
 }
 
 .social-icons {
@@ -199,21 +302,36 @@ body {
     color: #fff;
     font-size: 24px;
     margin: 0 10px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-icon:hover {
     color: #28a745;
+    transform: scale(1.2) rotate(15deg);
 }
 
 hr {
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #424242;
     margin: 20px 0;
 }
 
 span {
     color: #28a745;
+}
+.footer-divider {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.designer-name {
+    color: #28a745;
+    transition: all 0.3s ease;
+}
+
+.designer-name:hover {
+    text-shadow: 0 0 5px #28a745;
 }
 
 @keyframes fadeInUp {
@@ -232,6 +350,12 @@ span {
         background-color: #1a1a1a;
         padding: 10px;
         border-radius: 5px;
+        animation: slideDown 0.3s ease-in-out;
+    }
+    
+    @keyframes slideDown {
+        from { transform: translateY(-20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
     }
     
     .custom-container {
@@ -246,7 +370,6 @@ span {
         margin-left: 0;
     }
 }
-
 @media (max-width: 768px) {
     .footer h1 {
         font-size: 24px;
@@ -260,4 +383,44 @@ span {
         margin: 0 auto 20px;
         display: block;
     }
+}
+
+.custom-navbar .nav-link:focus,
+.custom-dropdown-toggle:focus,
+.custom-btn:focus,
+.custom-input:focus {
+    outline: 2px solid #28a745;
+    outline-offset: 2px;
+}
+
+/* Animaciones sutiles */
+.custom-btn, .nav-link, .social-icon {
+    transition: all 0.3s ease;
+}
+
+.custom-btn:active, .nav-link:active, .social-icon:active {
+    transform: scale(0.95);
+}
+
+/* Mejoras en la legibilidad */
+.custom-footer p, .custom-footer li {
+    line-height: 1.6;
+}
+
+/* Estilo para el scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #28a745;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #24933e;
 }

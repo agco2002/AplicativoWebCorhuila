@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login.php');
+    exit();
+}
+
 // Conectarse a la base de datos
 $db = new mysqli('localhost', 'root', '', 'corhuila');
 
@@ -22,7 +28,8 @@ $stmtEvento->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar participantes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap" rel="stylesheet">
     <link href="styles/estilo_agregar_participante.css" rel="stylesheet">
 </head>
 <body>
@@ -63,44 +70,39 @@ $stmtEvento->close();
     <div class="container mt-5">
         <div class="card">
             <div class="card-body">
-                <h1 class="card-title text-center mb-4">Agregar participantes</h1>
+                <h1 class="text-center mb-5 text-success">Agregar participantes</h1>
 
-                <div class="mb-4">
-                    <h2 class="h4">Evento: <?php echo htmlspecialchars($tituloEvento); ?></h2>
-                    <h3 class="h5">Iniciador: <?php echo htmlspecialchars($iniciador); ?></h3>
-                    <p class="mb-1">Fecha: <?php echo htmlspecialchars($fechaEvento); ?> - Hora: <?php echo htmlspecialchars($horaEvento); ?></p>
+                <div class="event-details mb-4">
+                    <h2>Evento: <?php echo htmlspecialchars($tituloEvento); ?></h2>
+                    <h3>Iniciador: <?php echo htmlspecialchars($iniciador); ?></h3>
+                    <p>Fecha: <?php echo htmlspecialchars($fechaEvento); ?> - Hora: <?php echo htmlspecialchars($horaEvento); ?></p>
                     <p>Ubicación: <?php echo htmlspecialchars($ubicacionEvento); ?></p>
                 </div>
 
                 <form action="Lista Eventos/guardar_participantes.php" method="post">
                     <input type="hidden" name="id_evento" value="<?php echo htmlspecialchars($idEvento); ?>">
-
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="nombre" class="form-label">Nombre:</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" required>
                     </div>
-
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="identificación" class="form-label">Identificación:</label>
                         <input type="text" class="form-control" id="identificación" name="identificación" required>
                     </div>
-
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="correo" class="form-label">Correo electrónico:</label>
                         <input type="email" class="form-control" id="correo" name="correo" required>
                     </div>
-
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">Agregar participante</button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success w-100">Agregar participante</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <br><br>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer mt-5">
         <div class="container-fluid custom-container">
             <h1 class="text-center">Corporación Universitaria del Huila</h1>
             <br>

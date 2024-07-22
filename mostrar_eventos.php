@@ -1,4 +1,12 @@
 <?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login.php');
+    exit();
+}
+?>
+
+<?php
 // Conectarse a la base de datos
 $db = new mysqli('localhost', 'root', '', 'corhuila');
 

@@ -1,3 +1,4 @@
+<!--crear_eventos.php-->
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
@@ -54,7 +55,7 @@ if (!isset($_SESSION['usuario'])) {
     <div class="container mt-5">
         <div class="card">
             <div class="card-body">
-                <h1 class="card-title text-center mb-4">Crear evento</h1>
+                <h1 class="text-center mb-5 text-success">Crear evento</h1>
                 <form action="guardar_evento.php" method="post">
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -86,7 +87,7 @@ if (!isset($_SESSION['usuario'])) {
                             <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
                         </div>
                         <div class="col-12 mt-4">
-                            <button type="submit" class="btn btn-primary w-100">Crear evento</button>
+                            <button type="submit" class="btn btn-success w-100">Crear evento</button>
                         </div>
                     </div>
                 </form>

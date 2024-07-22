@@ -1,51 +1,91 @@
 @import url('https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap');
 
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Geomanist', sans-serif;
-    background-color: #e8f5e9; /* Light green background */
+    background-color: #f0f8f0;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Navbar styles */
 .navbar {
     background: linear-gradient(45deg, #1a1a1a, #2c2c2c) !important;
+    position: relative;
+    z-index: 1000;
 }
 
 .custom-container {
-    padding-left: 1rem !important;
+    padding-left: 3cm !important;
+    
 }
 
 .custom-logo {
-    transition: filter 0.3s ease;
+    margin-right: 5cm;
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .custom-logo:hover {
-    filter: drop-shadow(0 0 4px #28a745);
+    filter: drop-shadow(0 0 4px #2e7d32);
+    transform: scale(1.05);
+}
+.navbar-collapse {
+    margin-left: 5cm;
+    display: flex;
+    justify-content: center;
 }
 
 .navbar-brand, .nav-link {
     color: #ffffff !important;
     transition: color 0.3s ease;
+    position: relative;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #28a745;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
 }
 
 .nav-link:hover {
     color: #28a745 !important;
+    transform: translateY(-2px);
 }
 
 .dropdown-toggle {
     background-color: #28a745 !important;
     border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .dropdown-toggle:hover {
-    background-color: #218838 !important;
+    background-color: #24933e !important;
+    transform: scale(1.05);
 }
 
 .dropdown-menu {
     background-color: #1a1a1a;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .dropdown-item {
     color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dropdown-item:hover {
@@ -101,33 +141,44 @@ body {
     background-color: #1a1a1a;
     color: #fff;
     padding: 40px 0;
+    flex-shrink: 0;
 }
 
 .footer h2 {
-    font-size: 28px;
+    font-size: 22px;
     color: #fff;
     margin-bottom: 20px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
+    animation: pulse 2s infinite;
+    text-transform: uppercase; 
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 .footer h2:hover {
     color: #28a745;
+    transform: translate(5px);
 }
 
 .footer-logo {
     max-width: 100%;
     height: auto;
     margin-bottom: 20px;
-    transition: filter 0.3s ease;
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .footer-logo:hover {
-    filter: drop-shadow(0 0 10px #28a745);
+    filter: drop-shadow(0 0 10px #4caf50);
+    transform: scale(1.05);
 }
 
 .footer h5 {
-    color: #28a745;
+    color: #4caf50;
     margin-bottom: 15px;
+    transition: transform 0.3s ease;
 }
 
 .footer ul {
@@ -136,11 +187,12 @@ body {
 
 .footer ul li {
     margin-bottom: 10px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .footer ul li:hover, .footer p:hover {
     color: #28a745;
+    transform: translateX(5px);
 }
 
 .social-icons {
@@ -152,21 +204,62 @@ body {
     color: #fff;
     font-size: 24px;
     margin: 0 10px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-icon:hover {
     color: #28a745;
+    transform: scale(1.2) rotate(15deg);
 }
 
 hr {
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #424242;
     margin: 20px 0;
 }
 
 span {
     color: #28a745;
+}
+
+.custom-navbar .nav-link:focus,
+.custom-dropdown-toggle:focus,
+.custom-btn:focus,
+.custom-input:focus {
+    outline: 2px solid #28a745;
+    outline-offset: 2px;
+}
+
+/* Animaciones sutiles */
+.custom-btn, .nav-link, .social-icon {
+    transition: all 0.3s ease;
+}
+
+.custom-btn:active, .nav-link:active, .social-icon:active {
+    transform: scale(0.95);
+}
+
+/* Mejoras en la legibilidad */
+.custom-footer p, .custom-footer li {
+    line-height: 1.6;
+}
+
+/* Estilo para el scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #28a745;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #24933e;
 }
 
 /* Responsive styles */

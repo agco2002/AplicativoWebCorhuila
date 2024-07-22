@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login.php');
+    exit();
+}
+
 // Obtener ID del evento y ID del participante
 $idEvento = $_GET['id_evento'];
 $idParticipante = $_GET['id_participante'];
@@ -25,7 +31,8 @@ $db->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Participante - CORHUILA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap" rel="stylesheet">
     <link href="styles/estilo_editar_participante.css" rel="stylesheet">
 </head>
 <body>
@@ -64,39 +71,34 @@ $db->close();
 
     <!-- Contenido principal -->
     <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title text-center mb-4">Editar Participante</h2>
-                        <form action="actualizar_participante.php" method="post">
-                            <input type="hidden" name="id_evento" value="<?php echo htmlspecialchars($idEvento); ?>">
-                            <input type="hidden" name="id_participante" value="<?php echo htmlspecialchars($idParticipante); ?>">
-                            
-                            <div class="mb-3">
-                                <label for="nombre" class="form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo htmlspecialchars($nombre); ?>" required>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="identificación" class="form-label">Identificación:</label>
-                                <input type="text" class="form-control" id="identificación" name="identificación" value="<?php echo htmlspecialchars($identificación); ?>" required>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="correo" class="form-label">Correo electrónico:</label>
-                                <input type="email" class="form-control" id="correo" name="correo" value="<?php echo htmlspecialchars($correo); ?>" required>
-                            </div>
-                            
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary btn-lg">Actualizar Participante</button>
-                            </div>
-                        </form>
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center mb-5 text-success">Editar Participante</h1>
+                <form action="actualizar_participante.php" method="post">
+                    <input type="hidden" name="id_evento" value="<?php echo htmlspecialchars($idEvento); ?>">
+                    <input type="hidden" name="id_participante" value="<?php echo htmlspecialchars($idParticipante); ?>">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo htmlspecialchars($nombre); ?>" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="identificación" class="form-label">Identificación:</label>
+                            <input type="text" class="form-control" id="identificación" name="identificación" value="<?php echo htmlspecialchars($identificación); ?>" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="correo" class="form-label">Correo electrónico:</label>
+                            <input type="email" class="form-control" id="correo" name="correo" value="<?php echo htmlspecialchars($correo); ?>" required>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-success w-100">Actualizar Participante</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
+
 
     <!-- Footer -->
     <footer class="footer mt-5">
@@ -161,11 +163,7 @@ $db->close();
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function cerrarSesion() {
-            // Implementa aquí la lógica para cerrar sesión
-            alert('Cerrar sesión');
-        }
-    </script>
+    
+     <script src="js/script.js"></script>
 </body>
 </html>
