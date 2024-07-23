@@ -37,7 +37,7 @@ try {
         // Evento eliminado correctamente, confirmar transacción
         $db->commit();
         echo "<script>
-                alert('Evento y sus participantes (si los había) eliminados correctamente.');
+                alert('Evento y sus participantes eliminados correctamente.');
                 window.location.href = '../mostrar_eventos.php';
               </script>";
     } else {

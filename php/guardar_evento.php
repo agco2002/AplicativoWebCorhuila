@@ -32,7 +32,7 @@ if (isset($_POST['titulo']) && isset($_POST['iniciador']) &&
         echo json_encode([
             'status' => 'success',
             'message' => 'Evento creado correctamente.',
-            'redirect' => "ver_evento.php?id_evento=$idEvento"
+            'redirect' => "./ver_evento.php?id_evento=$idEvento"
         ]);
     } else {
         echo json_encode([
