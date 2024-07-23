@@ -16,18 +16,18 @@ body {
 
 /*Estilo Titulo*/
 h3.text-center.mb-5.text-success {
-    color: #1f9f4c !important; /* Darker green mixed with black */
+    color: #1f9f4c !important;
     font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
-    display: block; /* Cambiado de inline-block a block */
+    display: block;
     padding: 10px 20px;
     overflow: hidden;
-    text-align: center; /* Añadido para centrar el texto */
-    margin: 0 auto; /* Añadido para centrar el elemento */
-    max-width: fit-content; /* Añadido para ajustar el ancho al contenido */
+    text-align: center;
+    margin: 0 auto;
+    max-width: fit-content;
 }
 
 h3.text-center.mb-5.text-success::before {
@@ -63,14 +63,13 @@ h3.text-center.mb-5.text-success::after {
 
 .container {
     padding-left:3cm !important;
-    background-color: #e6f7e6; /* Un verde muy claro */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 0 10px rgba(40, 167, 69, 0.1); /* Sombra suave con tono verde */
-    padding: 20px; /* Espaciado interno */
+    background-color: #e6f7e6;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.1);
+    padding: 20px;
     margin-bottom: 30px; 
-    
-} 
- 
+}
+
 h1, h2, h3 {
     color: #28a745;
 }
@@ -87,6 +86,7 @@ h1, h2, h3 {
     transition: all 0.3s ease;
     z-index: 1;
 }
+
 .custom-btn:before {
     content: '';
     position: absolute;
@@ -98,14 +98,17 @@ h1, h2, h3 {
     transition: all 0.4s;
     z-index: -1;
 }
+
 .custom-btn:hover:before {
     left: 100%;
 }
+
 .custom-btn:hover {
     background-color: #218838;
     box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
     transform: translateY(-3px);
 }
+
 .custom-btn:active {
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(40, 167, 69, 0.4);
@@ -113,11 +116,73 @@ h1, h2, h3 {
 
 .custom-table {
     background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .custom-table thead {
     background-color: #28a745;
     color: #ffffff;
+}
+
+.custom-table th, .custom-table td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #f1f8e9;
+}
+
+.btn-table {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    margin: 0 0.1rem;
+    border: none; /* Esto quita el borde */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-edit {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-edit:hover {
+    background-color: #e0a800;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: #ffffff;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.btn-table:hover {
+    animation: shake 0.5s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .modal-content {
@@ -139,7 +204,6 @@ h1, h2, h3 {
     border-color: #28a745;
     box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
 }
-
 
 .date-time-inputs {
     display: flex;
@@ -272,13 +336,12 @@ h1, h2, h3 {
     animation: pulse 2s infinite;
     text-transform: uppercase; 
 }
+
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
-    
 }
-
 
 .footer-title:hover {
     color: #28a745;
@@ -302,6 +365,7 @@ h1, h2, h3 {
     margin-bottom: 15px;
     transition: transform 0.3s ease;
 }
+
 .footer h5:hover {
     transform: translateX(5px);
 }
@@ -336,11 +400,13 @@ h1, h2, h3 {
     color: #28a745;
     transform: scale(1.2) rotate(15deg);
 }
+
 hr {
     border: 0;
     border-top: 1px solid #424242;
     margin: 20px 0;
 }
+
 span {
     color: #28a745;
 }

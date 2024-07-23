@@ -78,7 +78,7 @@ $db->close();
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center mb-5 text-success">Editar evento</h1>
-                <form action="actualizar_evento.php" method="post">
+                <form action="Lista Eventos/actualizar_evento.php" method="post">
                     <input type="hidden" name="id_evento" value="<?php echo $idEvento; ?>">
                     <div class="row g-3">
                         <div class="col-md-6">

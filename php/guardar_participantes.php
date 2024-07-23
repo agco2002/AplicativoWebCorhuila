@@ -17,7 +17,7 @@ if (isset($_POST['id_evento']) && isset($_POST['nombre']) && isset($_POST['ident
   $stmt->execute();
 
   if ($stmt->affected_rows === 1) {
-    echo "Participante agregado correctamente. <a href='ver_evento.php?id_evento=$idEvento'>Volver</a>";
+    echo "Participante agregado correctamente. <a href='../ver_evento.php?id_evento=$idEvento'>Volver</a>";
   } else {
     echo "Error al agregar el participante: " . $db->error;
   }

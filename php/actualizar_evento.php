@@ -25,7 +25,7 @@ $stmt->execute();
 if ($stmt->affected_rows === 1) {
     echo "Evento actualizado correctamente.";
     // Redireccionar al usuario (ej: ver_evento.php)
-    header('Location: ver_evento.php?id_evento=' . $idEvento);
+    header('Location: ../ver_evento.php?id_evento=' . $idEvento);
 } else {
     echo "Error al actualizar el evento: " . $db->error;
 }

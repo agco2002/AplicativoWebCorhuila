@@ -1,12 +1,11 @@
+<!--ver_evento.php-->
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
     header('Location: login.php');
     exit();
 }
-?>
 
-<?php
 // Obtener ID del evento
 $idEvento = $_GET['id_evento'];
 
@@ -73,20 +72,37 @@ $hora_ampm = date("h:i A", strtotime($hora_24));
 
     <!-- Main Content -->
     <div class="container mt-5">
-        <div class="card mb-4">
-            <div class="card-body">
-                <h1 class="card-title text-success"><?php echo htmlspecialchars($tituloEvento); ?></h1>
-                <h2 class="card-subtitle mb-2 text-muted"><?php echo htmlspecialchars($iniciadorEvento); ?> - <?php echo htmlspecialchars($cargoEvento); ?></h2>
-                <p class="card-text"><?php echo htmlspecialchars($descripcionEvento); ?></p>
-                <p class="card-text"><strong>Fecha:</strong> <?php echo htmlspecialchars($fechaEvento); ?> - <strong>Hora:</strong> <?php echo htmlspecialchars($hora_ampm); ?></p>
-                <p class="card-text"><strong>Ubicación:</strong> <?php echo htmlspecialchars($ubicacionEvento); ?></p>
-                
-                <div class="d-flex justify-content-between mt-4">
-                    <a href="agregar_participantes.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-custom">Agregar participantes</a>
-                    <a href="generar_pdf.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-custom">Descargar PDF</a>
-                    <a href="editar_evento.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-warning">Editar evento</a>
-                    <a href="Lista Eventos/eliminar_evento.php?id_evento=<?php echo $idEvento; ?>" class="btn btn-danger">Eliminar evento</a>
+        <div class="event-card">
+            <h1 class="event-title"><?php echo htmlspecialchars($tituloEvento); ?></h1>
+            <div class="event-details">
+                <div class="detail-item">
+                    <i class="fas fa-user"></i>
+                    <span><?php echo htmlspecialchars($iniciadorEvento); ?></span>
                 </div>
+                <div class="detail-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span><?php echo htmlspecialchars($cargoEvento); ?></span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span><?php echo htmlspecialchars($ubicacionEvento); ?></span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span><?php echo htmlspecialchars($fechaEvento); ?></span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-clock"></i>
+                    <span><?php echo htmlspecialchars($hora_ampm); ?></span>
+                </div>
+            </div>
+            <p class="event-description"><?php echo htmlspecialchars($descripcionEvento); ?></p>
+            
+            <div class="event-actions">
+                <a href="agregar_participantes.php?id_evento=<?php echo $idEvento; ?>" class="btn-action btn-add">Agregar participantes</a>
+                <a href="generar_pdf.php?id_evento=<?php echo $idEvento; ?>" class="btn-action btn-pdf">Descargar PDF</a>
+                <a href="editar_evento.php?id_evento=<?php echo $idEvento; ?>" class="btn-action btn-edit">Editar evento</a>
+                <a href="Lista Eventos/eliminar_evento.php?id_evento=<?php echo $idEvento; ?>" class="btn-action btn-delete">Eliminar evento</a>
             </div>
         </div>
 
@@ -101,10 +117,10 @@ $hora_ampm = date("h:i A", strtotime($hora_24));
             $result = $stmtParticipantes->get_result();
 
             if ($result->num_rows > 0) {
-                echo "<h3 class='text-success mb-3'>Participantes actuales:</h3>";
+                echo "<h3 class='participants-title'>Participantes actuales:</h3>";
                 echo "<div class='table-responsive'>";
                 echo "<table class='table table-hover'>";
-                echo "<thead class='table-success'><tr><th>Nombre</th><th>Identificación</th><th>Correo</th><th>Acciones</th></tr></thead>";
+                echo "<thead><tr><th>Nombre</th><th>Identificación</th><th>Correo</th><th>Acciones</th></tr></thead>";
                 echo "<tbody>";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
@@ -112,24 +128,25 @@ $hora_ampm = date("h:i A", strtotime($hora_24));
                     echo "<td>" . htmlspecialchars($row['identificación']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['correo']) . "</td>";
                     echo "<td>
-                        <a href='editar_participante.php?id_evento=$idEvento&id_participante={$row['id_participante']}' class='btn btn-sm btn-warning me-2'>Editar</a>
-                        <a href='eliminar_participante.php?id_evento=$idEvento&id_participante={$row['id_participante']}' class='btn btn-sm btn-danger'>Eliminar</a>
+                        <a href='editar_participante.php?id_evento=$idEvento&id_participante={$row['id_participante']}' class='btn-table btn-edit'>Editar</a>
+                        <a href='eliminar_participante.php?id_evento=$idEvento&id_participante={$row['id_participante']}' class='btn-table btn-delete'>Eliminar</a>
                     </td>";
                     echo "</tr>";
                 }
                 echo "</tbody></table>";
                 echo "</div>";
             } else {
-                echo "<p class='alert alert-info'>No hay participantes registrados para este evento.</p>";
+                echo "<p class='no-participants'>No hay participantes registrados para este evento.</p>";
             }
         } else {
-            echo "<p class='alert alert-danger'>No se especificó un ID de evento válido.</p>";
+            echo "<p class='error-message'>No se especificó un ID de evento válido.</p>";
         }
 
         $stmtParticipantes->close();
         $db->close();
         ?>
     </div>
+
 
     <!-- Footer -->
     <footer class="footer mt-5">

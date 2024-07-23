@@ -23,7 +23,6 @@ body {
 
 .custom-container {
     padding-left: 3cm !important;
-    
 }
 
 .custom-logo {
@@ -35,6 +34,7 @@ body {
     filter: drop-shadow(0 0 4px #2e7d32);
     transform: scale(1.05);
 }
+
 .navbar-collapse {
     margin-left: 5cm;
     display: flex;
@@ -46,6 +46,7 @@ body {
     transition: color 0.3s ease;
     position: relative;
 }
+
 .nav-link::after {
     content: '';
     position: absolute;
@@ -93,34 +94,211 @@ body {
     color: #1a1a1a;
 }
 
-/* Card styles */
-.card {
-    transition: all 0.3s ease;
-    border: none;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+/* Event card styles */
+.event-card {
     background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
 }
 
-.card:hover {
+.event-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-.btn-custom {
+.event-title {
+    color: #1f9f4c;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+    animation: fadeInDown 0.5s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.event-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.detail-item i {
+    color: #28a745;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.detail-item span {
+    color: #333;
+    font-weight: 500;
+}
+
+.event-description {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    animation: fadeIn 0.5s ease 0.2s both;
+}
+
+/* Button styles */
+.btn-custom, .btn-action, .btn-table {
     background-color: #28a745;
     border-color: #28a745;
     color: white;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
     transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
 }
 
-.btn-custom:hover {
+.btn-custom:hover, .btn-action:hover, .btn-table:hover {
     background-color: #218838;
     border-color: #1e7e34;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* Wave effect on click */
+.btn-custom:after, .btn-action:after, .btn-table:after {
+    content: "";
+    background: rgba(255,255,255,0.3);
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    padding-top: 240%;
+    padding-left: 240%;
+    margin-top: -120%;
+    margin-left: -120%;
+    opacity: 0;
+    transition: all 0.8s;
+}
+
+.btn-custom:active:after, .btn-action:active:after, .btn-table:active:after {
+    padding-top: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-left: 0;
+    opacity: 1;
+    transition: 0s;
+}
+
+/* Color variations for specific buttons */
+.btn-pdf {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-pdf:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.btn-edit {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #212529;
+}
+
+.btn-edit:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Additional animation for all buttons */
+@keyframes pulse-grow {
+    to {
+        transform: scale(1.05);
+    }
+}
+
+.btn-custom:hover, .btn-action:hover, .btn-table:hover {
+    animation: pulse-grow 0.3s ease-in-out infinite alternate;
+}
+
+/* Event actions styles */
+.event-actions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.btn-action {
+    flex: 1;
+    text-align: center;
+    margin: 0.5rem;
+    min-width: 120px; /* Asegura un ancho mínimo para los botones */
+}
+
+/* Specific styles for table buttons */
+.btn-table {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Additional animation for table buttons */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.btn-table:hover {
+    animation: shake 0.5s ease-in-out;
+}
+
 /* Table styles */
+.participants-title {
+    color: #1a5c2c;
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    animation: fadeIn 0.5s ease;
+}
+
 .table-responsive {
     background-color: #ffffff;
     border-radius: 5px;
@@ -129,11 +307,33 @@ body {
 
 .table {
     margin-bottom: 0;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.table-success {
+.table thead {
     background-color: #28a745;
-    color: #ffffff;
+    color: white;
+}
+
+.table th, .table td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f8e9;
+}
+
+.no-participants, .error-message {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
 }
 
 /* Footer styles */
@@ -152,6 +352,7 @@ body {
     animation: pulse 2s infinite;
     text-transform: uppercase; 
 }
+
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
@@ -230,21 +431,21 @@ span {
     outline-offset: 2px;
 }
 
-/* Animaciones sutiles */
-.custom-btn, .nav-link, .social-icon {
-    transition: all 0.3s ease;
+/* Additional animations */
+.event-title:hover {
+    animation: pulse 1s infinite;
 }
 
-.custom-btn:active, .nav-link:active, .social-icon:active {
-    transform: scale(0.95);
+.detail-item:hover i {
+    animation: spin 1s linear infinite;
 }
 
-/* Mejoras en la legibilidad */
-.custom-footer p, .custom-footer li {
-    line-height: 1.6;
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-/* Estilo para el scrollbar personalizado */
+/* Scrollbar style */
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -297,49 +498,12 @@ span {
         display: block;
     }
 
-    .btn-custom {
-        margin-bottom: 10px;
-    }
-
-    .d-flex {
+    .event-actions {
         flex-direction: column;
     }
-}
-
-/* Additional styles for ver_evento.php */
-.alert {
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-.alert-info {
-    background-color: #d1ecf1;
-    border-color: #bee5eb;
-    color: #0c5460;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    color: #721c24;
-}
-
-.btn-warning, .btn-danger {
-    transition: all 0.3s ease;
-}
-
-.btn-warning:hover, .btn-danger:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.table-hover tbody tr:hover {
-    background-color: #f1f8e9;
-}
-
-.btn-sm {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    border-radius: 0.2rem;
+    
+    .btn-action {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
 }

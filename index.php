@@ -17,6 +17,7 @@ $usuarios = obtenerUsuarios();
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Geomanist:wght@400;700&display=swap" rel="stylesheet">
     <link href="styles/estilos.css" rel="stylesheet">
+    <link href="styles/tabla_usuarios.css" rel="stylesheet">
 </head>
 <body>
     <!-- Cabecera -->
@@ -57,45 +58,48 @@ $usuarios = obtenerUsuarios();
         <button class="mb-3 btn custom-btn" data-bs-toggle="modal" data-bs-target="#registroModal">Registrar Usuario</button>
         <input type="text" id="buscador" class="form-control mb-5 custom-input" placeholder="Buscar usuarios...">
         <div class="table-responsive">
-            <table class="table table-striped table-hover custom-table">
-                <thead>
+    <table class="table table-striped table-hover custom-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Identificación</th>
+                <th>Cargo</th>
+                <th>Fecha de Ingreso</th>
+                <th>Hora de Ingreso</th>
+                <th>Fecha de Salida</th>
+                <th>Hora de Salida</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaUsuarios">
+            <?php if ($usuarios): ?>
+                <?php foreach ($usuarios as $usuario): ?>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Identificación</th>
-                        <th>Cargo</th>
-                        <th>Fecha de Ingreso</th>
-                        <th>Hora de Ingreso</th>
-                        <th>Fecha de Salida</th>
-                        <th>Hora de Salida</th>
-                        <th>Acciones</th>
+                        <td><?php echo htmlspecialchars($usuario['nombre']); ?></td>
+                        <td><?php echo htmlspecialchars($usuario['identificacion']); ?></td>
+                        <td><?php echo htmlspecialchars($usuario['cargo']); ?></td>
+                        <td><?php echo htmlspecialchars($usuario['fecha_ingreso']); ?></td>
+                        <td><?php echo date('h:i A', strtotime($usuario['hora_ingreso'])); ?></td>
+                        <td><?php echo htmlspecialchars($usuario['fecha_salida']); ?></td>
+                        <td><?php echo date('h:i A', strtotime($usuario['hora_salida'])); ?></td>
+                        <td>
+                            <div class="d-flex justify-content-around">
+                                <button class="btn-table btn-edit" onclick="editarUsuario(<?php echo $usuario['id']; ?>)">Editar</button>
+                                <button class="btn-table btn-delete" onclick="eliminarUsuario(<?php echo $usuario['id']; ?>)">Eliminar</button>
+                                <button class="btn-table btn-info" onclick="verDetalles(<?php echo $usuario['id']; ?>)">Detalles</button>
+                            </div>
+                        </td>
                     </tr>
-                </thead>
-                <tbody id="tablaUsuarios">
-                    <?php if ($usuarios): ?>
-                        <?php foreach ($usuarios as $usuario): ?>
-                            <tr>
-                                <td><?php echo $usuario['nombre']; ?></td>
-                                <td><?php echo $usuario['identificacion']; ?></td>
-                                <td><?php echo $usuario['cargo']; ?></td>
-                                <td><?php echo $usuario['fecha_ingreso']; ?></td>
-                                <td><?php echo date('h:i A', strtotime($usuario['hora_ingreso'])); ?></td>
-                                <td><?php echo $usuario['fecha_salida']; ?></td>
-                                <td><?php echo date('h:i A', strtotime($usuario['hora_salida'])); ?></td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning custom-btn-warning" onclick="editarUsuario(<?php echo $usuario['id']; ?>)">Editar</button>
-                                    <button class="btn btn-sm btn-danger custom-btn-danger" onclick="eliminarUsuario(<?php echo $usuario['id']; ?>)">Eliminar</button>
-                                    <button class="btn btn-sm btn-info custom-btn-info" onclick="verDetalles(<?php echo $usuario['id']; ?>)">Detalles</button>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="8">No hay usuarios registrados.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="8">No hay usuarios registrados.</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+
     </div>
 
     <!-- Modal de Registro -->
