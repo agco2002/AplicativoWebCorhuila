@@ -79,7 +79,7 @@ $stmtEvento->close();
                     <p>Ubicación: <?php echo htmlspecialchars($ubicacionEvento); ?></p>
                 </div>
 
-                <form action="Lista Eventos/guardar_participantes.php" method="post">
+                <form action="php/guardar_participantes.php" method="post">
                     <input type="hidden" name="id_evento" value="<?php echo htmlspecialchars($idEvento); ?>">
                     <div class="form-group">
                         <label for="nombre" class="form-label">Nombre:</label>
@@ -107,10 +107,10 @@ $stmtEvento->close();
             <h1 class="text-center">Corporación Universitaria del Huila</h1>
             <br>
             <div class="row">
-                <div class="col-md-2 col-sm-12 mb-3">
-                    <img src="assets/CORHUILA.png" alt="Logo" class="footer-logo">
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <center><img src="assets/CORHUILA.png" alt="Logo" class="footer-logo"></center>
                 </div>
-                <div class="col-md-3 col-sm-6 mb-3">
+                <div class="col-md-2 col-sm-6 mb-3">
                     <h5>Sobre Nosotros</h5>
                     <p>Institución de Educación Superior Sujeta a Inspección y Vigilancia por el Ministerio de Educación Nacional</p>
                 </div>
@@ -165,5 +165,6 @@ $stmtEvento->close();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/participante.js"></script>
 </body>
 </html>

@@ -1,4 +1,10 @@
 <?php
+// Verificar si se recibió la confirmación
+if (!isset($_GET['confirmar']) || $_GET['confirmar'] != '1') {
+    header('Location: ../ver_evento.php?id_evento=' . $_GET['id_evento']);
+    exit();
+}
+
 // Obtener ID del evento
 $idEvento = $_GET['id_evento'];
 
@@ -30,8 +36,10 @@ try {
     if ($stmtEliminarEvento->affected_rows === 1) {
         // Evento eliminado correctamente, confirmar transacción
         $db->commit();
-        echo "Evento y sus participantes (si los había) eliminados correctamente.";
-        header("refresh:3;url=mostrar_eventos.php"); // Redireccionar después de 3 segundos
+        echo "<script>
+                alert('Evento y sus participantes (si los había) eliminados correctamente.');
+                window.location.href = '../mostrar_eventos.php';
+              </script>";
     } else {
         // No se encontró el evento, hacer rollback
         throw new Exception("No se encontró el evento para eliminar.");
@@ -39,7 +47,10 @@ try {
 } catch (Exception $e) {
     // Error al eliminar, hacer rollback
     $db->rollback();
-    echo "Error: " . $e->getMessage();
+    echo "<script>
+            alert('Error: " . $e->getMessage() . "');
+            window.location.href = '../ver_evento.php?id_evento=" . $idEvento . "';
+          </script>";
 }
 
 // Cerrar consultas y conexión

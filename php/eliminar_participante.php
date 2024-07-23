@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+
 // Obtener ID del evento y ID del participante
 $idEvento = $_GET['id_evento'];
 $idParticipante = $_GET['id_participante'];
@@ -13,9 +15,9 @@ $stmtEliminarParticipante->bind_param('ii', $idParticipante, $idEvento);
 $stmtEliminarParticipante->execute();
 
 if ($stmtEliminarParticipante->affected_rows === 1) {
-    echo "Participante eliminado correctamente. <a href='ver_evento.php?id_evento=$idEvento'>Volver</a>";
+    echo json_encode(['success' => true, 'message' => 'Participante eliminado correctamente.']);
 } else {
-    echo "Error al eliminar el participante: " . $db->error;
+    echo json_encode(['success' => false, 'message' => 'Error al eliminar el participante: ' . $db->error]);
 }
 
 $stmtEliminarParticipante->close();

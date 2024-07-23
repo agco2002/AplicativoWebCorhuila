@@ -42,53 +42,100 @@ define('COLOR_VERDE', array(76, 175, 80));
 define('COLOR_GRIS', array(224, 224, 224));
 define('COLOR_TEXTO', array(33, 33, 33));
 
-$pdf = new FPDF();
+class PDF extends FPDF
+{
+    function Header()
+    {
+        // Logo
+        $this->Image('assets/CORHUILA5.png', 10, 6, 50);
+        // Fuente
+        $this->SetFont('Arial', 'B', 20);
+        $this->SetTextColor(76, 175, 80); // Color verde (RGB)
+        // Mover a la derecha
+        $this->Cell(20);
+        // Título
+        $this->Cell(0, 20, 'EVENTO CORHUILA', 0, 0, 'C');
+        // Salto de línea
+        $this->Ln(35); // Aumentado para dar más espacio
+        // Resetear el color del texto para el resto del documento
+        $this->SetTextColor(0);
+    }
+
+    function Footer()
+    {
+        // Posición: a 1,5 cm del final
+        $this->SetY(-15);
+        // Fuente
+        $this->SetFont('Arial', 'I', 8);
+        // Número de página
+        $this->Cell(0, 10, 'Página ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
+    }
+}
+
+$pdf = new PDF();
+$pdf->AliasNbPages();
 $pdf->AddPage();
-$pdf->SetMargins(10, 20, 10); // Reducir márgenes laterales
+$pdf->SetMargins(10, 20, 10);
 $pdf->SetTextColor(COLOR_TEXTO[0], COLOR_TEXTO[1], COLOR_TEXTO[2]);
 
 // Información del evento
-$pdf->SetFont('Arial', 'B', 18);
-$pdf->Cell(0, 15, utf8_to_latin1($tituloEvento), 0, 1, 'C');
+$pdf->SetFont('Arial', 'B', 16);
+$pdf->SetFillColor(COLOR_VERDE[0], COLOR_VERDE[1], COLOR_VERDE[2]);
+$pdf->SetTextColor(255, 255, 255);
+$pdf->Cell(0, 10, utf8_to_latin1($tituloEvento), 0, 1, 'C', true);
+$pdf->SetTextColor(COLOR_TEXTO[0], COLOR_TEXTO[1], COLOR_TEXTO[2]);
+
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Ln(5);
+
+$pdf->Cell(40, 10, 'Iniciador:', 0, 0, 'L');
 $pdf->SetFont('Arial', '', 12);
-$pdf->Cell(0, 10, utf8_to_latin1('Iniciador: ' . $iniciadorEvento), 0, 1);
-$pdf->Cell(0, 10, utf8_to_latin1('Cargo: ' . $cargoEvento), 0, 1);
-$pdf->Cell(0, 10, utf8_to_latin1('Fecha: ' . $fechaEvento . ' - Hora: ' . $horaEvento_ampm), 0, 1);
-$pdf->Cell(0, 10, utf8_to_latin1('Ubicación: ' . $ubicacionEvento), 0, 1);
-$pdf->MultiCell(0, 10, utf8_to_latin1('Descripción: ' . $descripcionEvento), 0, 'L');
+$pdf->Cell(0, 10, utf8_to_latin1($iniciadorEvento), 0, 1, 'L');
+
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(40, 10, 'Cargo:', 0, 0, 'L');
+$pdf->SetFont('Arial', '', 12);
+$pdf->Cell(0, 10, utf8_to_latin1($cargoEvento), 0, 1, 'L');
+
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(40, 10, 'Fecha y Hora:', 0, 0, 'L');
+$pdf->SetFont('Arial', '', 12);
+$pdf->Cell(0, 10, utf8_to_latin1($fechaEvento . ' - ' . $horaEvento_ampm), 0, 1, 'L');
+
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(40, 10, utf8_to_latin1('Ubicación:'), 0, 0, 'L');
+$pdf->SetFont('Arial', '', 12);
+$pdf->Cell(0, 10, utf8_to_latin1($ubicacionEvento), 0, 1, 'L');
+
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(40, 10, utf8_to_latin1('Descripción:'), 0, 0, 'L');
+$pdf->SetFont('Arial', '', 12);
+$pdf->MultiCell(0, 10, utf8_to_latin1($descripcionEvento), 0, 'L');
+
 // Tabla de participantes
 $pdf->Ln(10);
 $pdf->SetFont('Arial', 'B', 14);
-$pdf->Cell(0, 10, utf8_to_latin1('Participantes'), 0, 1, 'C');
-$pdf->SetFont('Arial', '', 10);
-
-// Calcular ancho de columnas y posición inicial para centrar
-$w1 = 50; // Ancho de la columna Nombre
-$w2 = 40; // Ancho de la columna Identificación
-$w3 = 60; // Ancho de la columna Correo electrónico
-$total_width = $w1 + $w2 + $w3;
-$left_margin = ($pdf->GetPageWidth() - $total_width) / 2;
-
-// Encabezado de la tabla
 $pdf->SetFillColor(COLOR_VERDE[0], COLOR_VERDE[1], COLOR_VERDE[2]);
 $pdf->SetTextColor(255, 255, 255);
-$pdf->SetX($left_margin);
-$pdf->Cell($w1, 10, utf8_to_latin1('Nombre'), 1, 0, 'C', true);
-$pdf->Cell($w2, 10, utf8_to_latin1('Identificación'), 1, 0, 'C', true);
-$pdf->Cell($w3, 10, utf8_to_latin1('Correo electrónico'), 1, 1, 'C', true);
+$pdf->Cell(0, 10, 'Participantes', 0, 1, 'C', true);
+$pdf->SetFont('Arial', '', 10);
+$pdf->SetTextColor(COLOR_TEXTO[0], COLOR_TEXTO[1], COLOR_TEXTO[2]);
+
+// Encabezado de la tabla
+$pdf->SetFillColor(COLOR_GRIS[0], COLOR_GRIS[1], COLOR_GRIS[2]);
+$pdf->Cell(60, 10, 'Nombre', 0, 0, 'C', true);
+$pdf->Cell(40, 10, utf8_to_latin1('Identificación'), 0, 0, 'C', true);
+$pdf->Cell(0, 10, utf8_to_latin1('Correo electrónico'), 0, 1, 'C', true);
 
 // Filas de la tabla
-$pdf->SetTextColor(COLOR_TEXTO[0], COLOR_TEXTO[1], COLOR_TEXTO[2]);
 $fill = false;
 while ($stmtParticipantes->fetch()) {
-    $pdf->SetX($left_margin);
-    $pdf->SetFillColor($fill ? COLOR_GRIS[0] : 255, $fill ? COLOR_GRIS[1] : 255, $fill ? COLOR_GRIS[2] : 255);
-    $pdf->Cell($w1, 10, utf8_to_latin1($nombreParticipante), 1, 0, 'L', $fill);
-    $pdf->Cell($w2, 10, utf8_to_latin1($identificacionParticipante), 1, 0, 'L', $fill);
-    $pdf->Cell($w3, 10, utf8_to_latin1($correoParticipante), 1, 1, 'L', $fill);
+    $pdf->SetFillColor($fill ? 245 : 255, $fill ? 245 : 255, $fill ? 245 : 255);
+    $pdf->Cell(60, 10, utf8_to_latin1($nombreParticipante), 0, 0, 'L', $fill);
+    $pdf->Cell(40, 10, utf8_to_latin1($identificacionParticipante), 0, 0, 'L', $fill);
+    $pdf->Cell(0, 10, utf8_to_latin1($correoParticipante), 0, 1, 'L', $fill);
     $fill = !$fill;
 }
-
 
 // Generar un nombre de archivo único
 $filename = 'evento_' . $idEvento . '_' . date('YmdHis') . '.pdf';
@@ -106,7 +153,3 @@ $db->close();
 
 exit;
 ?>
-
-
-
-

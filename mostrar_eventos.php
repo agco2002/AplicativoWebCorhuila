@@ -113,10 +113,10 @@ $db->close();
         <div class="container-fluid custom-container">
             <h2 class="text-center">Corporación Universitaria del Huila</h2>
             <div class="row mt-4">
-                <div class="col-md-2 col-sm-12 mb-3">
-                    <img src="assets/CORHUILA.png" alt="Logo" class="footer-logo">
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <center><img src="assets/CORHUILA.png" alt="Logo" class="footer-logo"></center>
                 </div>
-                <div class="col-md-3 col-sm-6 mb-3">
+                <div class="col-md-2 col-sm-6 mb-3">
                     <h5>Sobre Nosotros</h5>
                     <p>Institución de Educación Superior Sujeta a Inspección y Vigilancia por el Ministerio de Educación Nacional</p>
                 </div>

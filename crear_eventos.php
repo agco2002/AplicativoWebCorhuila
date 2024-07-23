@@ -56,7 +56,7 @@ if (!isset($_SESSION['usuario'])) {
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center mb-5 text-success">Crear evento</h1>
-                <form action="guardar_evento.php" method="post">
+                <form action="php/guardar_evento.php" method="post">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="titulo" class="form-label">Título:</label>
@@ -101,10 +101,10 @@ if (!isset($_SESSION['usuario'])) {
             <h1 class="text-center">Corporación Universitaria del Huila</h1>
             <br>
             <div class="row">
-                <div class="col-md-2 col-sm-12 mb-3">
-                    <img src="assets/CORHUILA.png" alt="Logo" class="footer-logo">
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <center><img src="assets/CORHUILA.png" alt="Logo" class="footer-logo"></center>
                 </div>
-                <div class="col-md-3 col-sm-6 mb-3">
+                <div class="col-md-2 col-sm-6 mb-3">
                     <h5>Sobre Nosotros</h5>
                     <p>Institución de Educación Superior Sujeta a Inspección y Vigilancia por el Ministerio de Educación Nacional</p>
                 </div>
@@ -159,5 +159,6 @@ if (!isset($_SESSION['usuario'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/eventos.js"></script>
 </body>
 </html>

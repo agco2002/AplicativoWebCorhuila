@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json');
 
 // Obtener datos del formulario
 if (isset($_POST['id_evento']) && isset($_POST['nombre']) && isset($_POST['identificación']) && isset($_POST['correo'])) {
@@ -17,16 +18,25 @@ if (isset($_POST['id_evento']) && isset($_POST['nombre']) && isset($_POST['ident
   $stmt->execute();
 
   if ($stmt->affected_rows === 1) {
-    echo "Participante agregado correctamente. <a href='../ver_evento.php?id_evento=$idEvento'>Volver</a>";
+    echo json_encode([
+      'status' => 'success',
+      'message' => 'Participante agregado correctamente.',
+      'redirect' => "ver_evento.php?id_evento=$idEvento"
+    ]);
   } else {
-    echo "Error al agregar el participante: " . $db->error;
+    echo json_encode([
+      'status' => 'error',
+      'message' => 'Error al agregar el participante: ' . $db->error
+    ]);
   }
 
   $stmt->close();
 } else {
-  echo "Faltan datos para agregar el participante.";
+  echo json_encode([
+    'status' => 'error',
+    'message' => 'Faltan datos para agregar el participante.'
+  ]);
 }
 
 $db->close();
-
 ?>

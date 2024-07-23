@@ -74,7 +74,7 @@ $db->close();
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center mb-5 text-success">Editar Participante</h1>
-                <form action="actualizar_participante.php" method="post">
+                <form action="php/actualizar_participante.php" method="post">
                     <input type="hidden" name="id_evento" value="<?php echo htmlspecialchars($idEvento); ?>">
                     <input type="hidden" name="id_participante" value="<?php echo htmlspecialchars($idParticipante); ?>">
                     <div class="row g-3">
@@ -106,10 +106,10 @@ $db->close();
             <h1 class="text-center">Corporación Universitaria del Huila</h1>
             <br>
             <div class="row">
-                <div class="col-md-2 col-sm-12 mb-3">
-                    <img src="assets/CORHUILA.png" alt="Logo" class="footer-logo">
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <center><img src="assets/CORHUILA.png" alt="Logo" class="footer-logo"></center>
                 </div>
-                <div class="col-md-3 col-sm-6 mb-3">
+                <div class="col-md-2 col-sm-6 mb-3">
                     <h5>Sobre Nosotros</h5>
                     <p>Institución de Educación Superior Sujeta a Inspección y Vigilancia por el Ministerio de Educación Nacional</p>
                 </div>

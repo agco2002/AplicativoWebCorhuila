@@ -181,3 +181,4 @@ function cerrarSesion() {
         window.location.href = 'login.php';
     });
 }
+

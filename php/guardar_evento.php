@@ -1,4 +1,7 @@
+guardar_evento.php
 <?php
+header('Content-Type: application/json');
+
 // Conectarse a la base de datos
 $db = new mysqli('localhost', 'root', '', 'corhuila');
 
@@ -26,14 +29,24 @@ if (isset($_POST['titulo']) && isset($_POST['iniciador']) &&
 
     if ($stmt->affected_rows === 1) {
         $idEvento = $stmt->insert_id;
-        echo "Evento creado correctamente. <a href='ver_evento.php?id_evento=$idEvento'>Ver evento</a>";
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Evento creado correctamente.',
+            'redirect' => "ver_evento.php?id_evento=$idEvento"
+        ]);
     } else {
-        echo "Error al crear el evento: " . $db->error;
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Error al crear el evento: ' . $db->error
+        ]);
     }
 
     $stmt->close();
 } else {
-    echo "Faltan datos para crear el evento.";
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Faltan datos para crear el evento.'
+    ]);
 }
 
 $db->close();

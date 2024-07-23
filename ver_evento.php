@@ -37,6 +37,7 @@ $hora_ampm = date("h:i A", strtotime($hora_24));
     <link href="styles/estilo_ver_eventos.css" rel="stylesheet">
 </head>
 <body>
+
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid custom-container">
@@ -102,49 +103,49 @@ $hora_ampm = date("h:i A", strtotime($hora_24));
                 <a href="agregar_participantes.php?id_evento=<?php echo $idEvento; ?>" class="btn-action btn-add">Agregar participantes</a>
                 <a href="generar_pdf.php?id_evento=<?php echo $idEvento; ?>" class="btn-action btn-pdf">Descargar PDF</a>
                 <a href="editar_evento.php?id_evento=<?php echo $idEvento; ?>" class="btn-action btn-edit">Editar evento</a>
-                <a href="Lista Eventos/eliminar_evento.php?id_evento=<?php echo $idEvento; ?>" class="btn-action btn-delete">Eliminar evento</a>
+                <a href="#" onclick="confirmarEliminacion(<?php echo $idEvento; ?>)" class="btn-action btn-delete">Eliminar evento</a>
             </div>
         </div>
 
         <?php
-        require_once 'php/conexion.php';
+            require_once 'php/conexion.php';
 
-        if ($idEvento) {
-            $sql = "SELECT id_participante, nombre, identificación, correo FROM participantes WHERE id_evento = ?";
-            $stmtParticipantes = $conn->prepare($sql);
-            $stmtParticipantes->bind_param("i", $idEvento);
-            $stmtParticipantes->execute();
-            $result = $stmtParticipantes->get_result();
+            if ($idEvento) {
+                $sql = "SELECT id_participante, nombre, identificación, correo FROM participantes WHERE id_evento = ?";
+                $stmtParticipantes = $conn->prepare($sql);
+                $stmtParticipantes->bind_param("i", $idEvento);
+                $stmtParticipantes->execute();
+                $result = $stmtParticipantes->get_result();
 
-            if ($result->num_rows > 0) {
-                echo "<h3 class='participants-title'>Participantes actuales:</h3>";
-                echo "<div class='table-responsive'>";
-                echo "<table class='table table-hover'>";
-                echo "<thead><tr><th>Nombre</th><th>Identificación</th><th>Correo</th><th>Acciones</th></tr></thead>";
-                echo "<tbody>";
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['identificación']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['correo']) . "</td>";
-                    echo "<td>
-                        <a href='editar_participante.php?id_evento=$idEvento&id_participante={$row['id_participante']}' class='btn-table btn-edit'>Editar</a>
-                        <a href='eliminar_participante.php?id_evento=$idEvento&id_participante={$row['id_participante']}' class='btn-table btn-delete'>Eliminar</a>
-                    </td>";
-                    echo "</tr>";
+                if ($result->num_rows > 0) {
+                    echo "<h3 class='participants-title'>Participantes actuales:</h3>";
+                    echo "<div class='table-responsive'>";
+                    echo "<table class='table table-hover'>";
+                    echo "<thead><tr><th>Nombre</th><th>Identificación</th><th>Correo</th><th>Acciones</th></tr></thead>";
+                    echo "<tbody>";
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['identificación']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['correo']) . "</td>";
+                        echo "<td>
+                            <a href='editar_participante.php?id_evento=$idEvento&id_participante={$row['id_participante']}' class='btn-table btn-edit'>Editar</a>
+                            <a href='#' onclick='confirmarEliminarParticipante($idEvento, {$row['id_participante']})' class='btn-table btn-delete'>Eliminar</a>
+                        </td>";
+                        echo "</tr>";
+                    }
+                    echo "</tbody></table>";
+                    echo "</div>";
+                } else {
+                    echo "<p class='no-participants'>No hay participantes registrados para este evento.</p>";
                 }
-                echo "</tbody></table>";
-                echo "</div>";
             } else {
-                echo "<p class='no-participants'>No hay participantes registrados para este evento.</p>";
+                echo "<p class='error-message'>No se especificó un ID de evento válido.</p>";
             }
-        } else {
-            echo "<p class='error-message'>No se especificó un ID de evento válido.</p>";
-        }
 
-        $stmtParticipantes->close();
-        $db->close();
-        ?>
+            $stmtParticipantes->close();
+            $db->close();
+         ?>
     </div>
 
 
@@ -153,10 +154,10 @@ $hora_ampm = date("h:i A", strtotime($hora_24));
         <div class="container-fluid custom-container">
             <h2 class="text-center">Corporación Universitaria del Huila</h2>
             <div class="row mt-4">
-                <div class="col-md-2 col-sm-12 mb-3">
-                    <img src="assets/CORHUILA.png" alt="Logo" class="footer-logo">
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <center><img src="assets/CORHUILA.png" alt="Logo" class="footer-logo"></center>
                 </div>
-                <div class="col-md-3 col-sm-6 mb-3">
+                <div class="col-md-2 col-sm-6 mb-3">
                     <h5>Sobre Nosotros</h5>
                     <p>Institución de Educación Superior Sujeta a Inspección y Vigilancia por el Ministerio de Educación Nacional</p>
                 </div>
@@ -211,5 +212,6 @@ $hora_ampm = date("h:i A", strtotime($hora_24));
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/eliminar.js"></script>
 </body>
 </html>
