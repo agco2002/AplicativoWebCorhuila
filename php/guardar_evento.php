@@ -1,5 +1,6 @@
-guardar_evento.php
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 header('Content-Type: application/json');
 
 // Conectarse a la base de datos
@@ -47,6 +48,10 @@ if (isset($_POST['titulo']) && isset($_POST['iniciador']) &&
         'status' => 'error',
         'message' => 'Faltan datos para crear el evento.'
     ]);
+}
+
+if (json_last_error() !== JSON_ERROR_NONE) {
+    error_log('JSON encode error: ' . json_last_error_msg());
 }
 
 $db->close();

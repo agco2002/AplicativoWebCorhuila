@@ -25,7 +25,7 @@ if (isset($_SESSION['usuario'])) {
                 <h1 class="text-center mb-4 title">CORHUILA</h1>
                 <form id="loginForm">
                 <div class="logo-container">
-                    <img src="assets/CORHUILA3.png" alt="CORHUILA Logo" class="logo">
+                    <img src="assets/LOGO-CORHUILA.webp" alt="CORHUILA Logo" class="logo">
                 </div>
                     <div class="mb-3 input-group">
                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>

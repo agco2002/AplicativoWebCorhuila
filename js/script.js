@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function toggleContrasenaField() {
         const contrasenaDiv = document.getElementById('contrasenaDiv');
-        contrasenaDiv.style.display = this.value === 'Administrativo' ? 'block' : 'none';
+        if (contrasenaDiv) {
+            contrasenaDiv.style.display = this.value === 'Administrativo' ? 'block' : 'none';
+        }
     }
 });
 
