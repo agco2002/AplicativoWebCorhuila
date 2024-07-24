@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-07-2024 a las 00:28:01
+-- Tiempo de generación: 24-07-2024 a las 15:32:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,12 +43,10 @@ CREATE TABLE `eventos` (
 --
 
 INSERT INTO `eventos` (`id_evento`, `titulo`, `iniciador`, `cargo`, `descripcion`, `fecha`, `hora`, `ubicacion`) VALUES
-(21, 'Emprendimiento', 'Andrés Calderón', 'Administrativo TIC', 'Exposición de proyectos', '2024-07-11', '22:46:00', 'cancha princial quirinal'),
-(22, 'Actividad cultural ', 'Andrés Calderón ', 'Administrativo TIC', 'Fiesta sampedrina ', '2024-07-17', '10:30:00', 'cancha princial quirinal '),
-(23, 'Evento deportivo ', 'Andrés Calderón Osorio', 'Administrativo TIC', 'Campeonato de micro ', '2024-07-17', '18:30:00', 'cancha princial quirinal '),
-(24, 'Evento deportivo ', 'Andrés Calderón Osorio', 'Administrativo TIC', 'Campeonato de Ajedrez ', '2024-08-03', '07:30:00', 'Sede quirinal '),
-(26, 'Actividad deportiva ', 'Andrés Calderón', 'Administrativo TIC', 'Campeonato de Vóleibol ', '2024-07-18', '07:30:00', 'Cancha principal sede quirinal'),
-(27, 'Evento institucional ', 'Andrés Calderón', 'Administrativo TIC', 'Exposición de programas de formación ', '2024-07-20', '08:30:00', 'Sede quirinal ');
+(84, 'Emprendimiento ', 'Andrés Calderón Osorio', 'Administrativo TIC', 'Exposición de proyectos innovadores de estudiantes y personal administrativo de la CORHUILA ', '2024-07-24', '10:30:00', 'Área TIC'),
+(85, 'Actividad deportiva ', 'Andrés Calderón Osorio', 'Administrativo TIC', 'Campeonato de futbol institucional ', '2024-07-24', '08:30:00', 'Cancha sintética '),
+(86, 'Fiesta sampedrina ', 'Andrés Calderón Osorio', 'Administrativo TIC', 'Actividad cultural desarrollada para fortalecer la sociabilidad entre las diferentes grupos administrativos de la CORHUILA ', '2024-07-24', '08:30:00', 'Cancha principal sede quirinal '),
+(87, 'Graduación de estudiantes ', 'Andrés Calderón Osorio', 'Administrativo TIC', 'Celebración de  graduación de los nuevos profesionales de ingeniería  ', '2024-07-24', '08:30:00', 'Cancha principal quirinal ');
 
 -- --------------------------------------------------------
 
@@ -69,12 +67,15 @@ CREATE TABLE `participantes` (
 --
 
 INSERT INTO `participantes` (`id_participante`, `id_evento`, `nombre`, `identificación`, `correo`) VALUES
-(59, 21, 'Patricia Calderon', '2386452747', 'pato@gmail.com'),
-(60, 21, 'Edgar Calderon', '23435456', 'elmejor@gmail.com'),
-(61, 21, 'Yorleny Osorio ', '18327497', 'lamejor@gmail.com'),
-(62, 21, 'Jesús  Calderon', '483943543', 'jesus@gmail.com'),
-(63, 22, 'Patricia Calderón ', '2343545', 'pablo@gmail.com'),
-(64, 21, 'Emiliano Calderon', '5546545465', 'agco7331@gmail.com');
+(82, 84, 'Andres Calderon ', '5862345', 'agco7331@gmail.com'),
+(83, 84, 'Edgar Calderon', '23435456', 'edgar@gmail.com'),
+(84, 84, 'Patricia Calderón Osorio', '2378546', 'patricia@gmail.com'),
+(85, 84, 'Jesús Calderón ', '5634786', 'jesus@gmail.com'),
+(86, 84, 'Emiliano Calderon', '34563467', 'emiliano@gmail.com'),
+(87, 84, 'Yorleny Osorio ', '436345647', 'yorleny@gmail.com'),
+(88, 85, 'Andres Calderon ', '3425236543', 'agco7331@gmail.com'),
+(89, 86, 'Andrés Calderón Osorio ', '23465376', 'agco7331@gmail.com'),
+(90, 87, 'Andrés Calderón Osorio ', '34634675', 'agco7331@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -104,11 +105,11 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `edad`, `identificacion`, `telefono`, `sexo`, `cargo`, `ubicacion`, `correo`, `fecha_ingreso`, `hora_ingreso`, `fecha_salida`, `hora_salida`, `contrasena`) VALUES
-(165, 'Andres Calderon ', 22, '23243535345', '3144863036', 'Masculino', 'Estudiante', 'Cancha sintética ', 'paesd@gmail.com', '2024-07-11', '17:38:00', '2024-07-11', '17:38:00', NULL),
+(165, 'Andres Calderon ', 22, '23243535345', '3144863036', 'Masculino', 'Externo', 'Cancha sintética ', 'paesd@gmail.com', '2024-07-11', '17:38:00', '2024-07-11', '17:38:00', NULL),
 (166, 'Patricia Calderon', 32, '11342354', '3144863036', 'Masculino', 'Administrativo', 'Cancha sintética ', 'agco7331@gmail.com', '2024-07-11', '17:43:00', '2024-07-11', '17:43:00', '$2y$10$y0RUgY4ObDSSsGOvMlr5m.JbIZNVjwksPX4OHi9lF01gdcRlIm/Be'),
 (167, 'Edgar Calderón ', 50, '3234', '3144663033', 'Masculino', 'Externo', 'cancha princial quirinal ', 'mila@gmail.com', '2024-07-12', '07:17:00', '2024-07-12', '07:17:00', NULL),
 (169, 'Yorleny Osorio ', 34, '242423', '3144663033', 'Femenino', 'Externo', 'cancha princial quirinal ', 'yorleny|@gmail.com', '2024-07-17', '11:44:00', '2024-07-17', '11:44:00', NULL),
-(171, 'Emiliano Calderon', 6, '4567489', '3132014205', 'Masculino', 'Estudiante', 'Cancha sintética ', 'emiliano@gmail.com', '2024-07-17', '11:46:00', '2024-07-17', '11:46:00', NULL);
+(175, 'Andres Calderon ', 33, '23243535', '31446630', 'Masculino', 'Profesor', 'Cancha sintética ', 'EYY@GMAIL.COM', '2024-07-23', '16:25:00', '2024-07-23', '16:25:00', '$2y$10$gayUa9F9gvQhcZclws741.Zn.aNqvOHbDJwaanKTuxJ/zokSrG9ae');
 
 --
 -- Índices para tablas volcadas
@@ -143,19 +144,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT de la tabla `participantes`
 --
 ALTER TABLE `participantes`
-  MODIFY `id_participante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id_participante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- Restricciones para tablas volcadas
